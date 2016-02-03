@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yiQ-QR-gNM">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="C0O-zo-4oE">
+            <objects>
+                <navigationController id="yiQ-QR-gNM" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FBj-w2-Lqq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="PRm-fu-Sko"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gsh-qr-Um4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1072.5" y="41.5"/>
+        </scene>
+        <!--Your Path Today-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Pathwayz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Pathwayz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,12 +34,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="hybrid" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1r4-K7-QrN">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="361"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="lyM-KY-O5d"/>
-                                </connections>
-                            </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="lat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHl-Mm-fHM">
                                 <rect key="frame" x="107" y="384" width="19" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -78,31 +89,61 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71i-my-Ocs">
-                                <rect key="frame" x="20" y="375" width="41" height="30"/>
-                                <state key="normal" title="+ Add"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="hybrid" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1r4-K7-QrN">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="361"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="lyM-KY-O5d"/>
+                                </connections>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7U-EQ-Qwi">
+                                <rect key="frame" x="87" y="301" width="200" height="41"/>
+                                <state key="normal" title="Save a Location"/>
+                                <connections>
+                                    <action selector="savePin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7hS-60-iqE"/>
+                                </connections>
                             </button>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Pathwayz-Pin.png" translatesAutoresizingMaskIntoConstraints="NO" id="gwx-lp-6bB">
+                                <rect key="frame" x="132" y="157" width="110" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="EzT-Xa-L3J"/>
+                                    <constraint firstAttribute="width" constant="110" id="nzX-Qo-jRN"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="1r4-K7-QrN" secondAttribute="trailing" id="1ZZ-30-Cwx"/>
+                            <constraint firstItem="A7U-EQ-Qwi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5Du-SZ-MEb"/>
                             <constraint firstItem="1r4-K7-QrN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="7Iu-mW-nu8"/>
                             <constraint firstItem="1r4-K7-QrN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="H0R-Gs-0P3"/>
+                            <constraint firstItem="gwx-lp-6bB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HKa-NZ-OHw"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Your Path Today" id="blG-Bm-dfX">
+                        <barButtonItem key="rightBarButtonItem" title="+ Save" id="TRB-7d-d2b">
+                            <connections>
+                                <action selector="savePin:" destination="BYZ-38-t0r" id="NY7-Oh-SWY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="accuracyField" destination="Xwu-3m-ZsI" id="VnD-fx-YZ1"/>
+                        <outlet property="buttonSaveLocation" destination="A7U-EQ-Qwi" id="MBr-iv-YKN"/>
                         <outlet property="latField" destination="HNr-Kg-3sA" id="WQk-LP-0jg"/>
                         <outlet property="longField" destination="AcU-CO-mAV" id="ElF-Hz-zIg"/>
                         <outlet property="mapView" destination="1r4-K7-QrN" id="TLb-r8-w5B"/>
+                        <outlet property="pinImage" destination="gwx-lp-6bB" id="CUE-sf-Vzc"/>
                         <outlet property="scaleField" destination="wgN-xo-pez" id="HfK-3f-sML"/>
                         <outlet property="speedField" destination="4Pn-1b-vD0" id="7uc-WQ-NGn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="304.5" y="387.5"/>
+            <point key="canvasLocation" x="-577.5" y="41.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Pathwayz-Pin.png" width="1024" height="1024"/>
+    </resources>
 </document>

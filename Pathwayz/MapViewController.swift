@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     
     
@@ -28,6 +28,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @IBOutlet weak var accuracyField: UITextField!
     @IBOutlet weak var speedField: UITextField!
     @IBOutlet weak var scaleField: UITextField!
+    
+    @IBOutlet weak var buttonSaveLocation: UIButton!
+    
+    @IBOutlet weak var pinImage: UIImageView!
     
     
     // Constants
@@ -50,20 +54,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         if CLLocationManager.locationServicesEnabled() {
                 
                 self.locationManager.delegate = self
-                self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+                self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
                 self.locationManager.startUpdatingLocation()
 //                self.locationManager.startUpdatingHeading()
 //                self.locationManager.startMonitoringSignificantLocationChanges()
-                self.locationManager.distanceFilter = 1
+                self.locationManager.distanceFilter = 20
             
                 //self.mapView setup to show user location
                 self.mapView.delegate = self
-                self.mapView.showsUserLocation = true
+//                self.mapView.showsUserLocation = true
                 self.mapView.showsScale = true
                 self.mapView.mapType = MKMapType(rawValue: 0)!
-                self.mapView.userTrackingMode = MKUserTrackingMode(rawValue: 2)!
+//                self.mapView.userTrackingMode = MKUserTrackingMode(rawValue: 2)!
 
         }
+        
+        
+        buttonSaveLocation.backgroundColor = UIColor.yellowColor()
+        buttonSaveLocation.setTitleColor(UIColor.grayColor(), forState: .Normal)
+        buttonSaveLocation.layer.cornerRadius = buttonSaveLocation.layer.visibleRect.height / 2
     
         
     }
@@ -76,10 +85,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
             regionRadius * 2.0, regionRadius * 2.0)
 
-        self.mapView.setRegion(coordinateRegion, animated: true)
+        self.mapView.setRegion(coordinateRegion, animated: false)
         
 //        self.locationManager.stopUpdatingLocation()
         
+        
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        
+        print("updated to location \(newLocation) from \(oldLocation)")
         
     }
     
@@ -98,7 +113,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         self.accuracyField.text = String(locations[0].horizontalAccuracy)
 
         
-        if (locations[0].horizontalAccuracy <= 30.0)
+        if (locations[0].horizontalAccuracy <= 20.0)
         {
 
              myLocations.append(locValue)
@@ -129,6 +144,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
     }
 
+    @IBAction func savePin(sender: AnyObject) {
+        
+        self.pinImage.hidden = false
+        
+    }
     
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         
