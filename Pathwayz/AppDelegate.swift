@@ -82,15 +82,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func notefromRegionIdentifier(identifier: String) -> String? {
-//        if let savedItems = NSUserDefaults.standardUserDefaults().arrayForKey(kSavedItemsKey) {
-//            for savedItem in savedItems {
-//                if let savedPin = NSKeyedUnarchiver.unarchiveObjectWithData(savedItem as! NSData) as? Geotification {
-//                    if savedPin.identifier == identifier {
-//                        return savedPin.note
-//                    }
-//                }
-//            }
-//        }
+        if let savedItems = NSUserDefaults.standardUserDefaults().arrayForKey(kSavedItemsKey) {
+            for savedItem in savedItems {
+                if let savedPin = NSKeyedUnarchiver.unarchiveObjectWithData(savedItem as! NSData) as? SavedPin {
+                    if savedPin.identifier == identifier {
+                        return savedPin.note
+                    }
+                }
+            }
+        }
         return nil
     }
 

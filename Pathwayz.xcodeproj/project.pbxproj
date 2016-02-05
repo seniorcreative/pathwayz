@@ -18,6 +18,7 @@
 		AA5B605A1C640C37008DEB71 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5B60591C640C37008DEB71 /* CloudKit.framework */; };
 		AA5B605C1C640C9B008DEB71 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5B605B1C640C9B008DEB71 /* MapKit.framework */; };
 		AA5B605E1C643A2D008DEB71 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B605D1C643A2D008DEB71 /* Utilities.swift */; };
+		AA5B60611C655412008DEB71 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5B60601C655412008DEB71 /* Images.xcassets */; };
 		AA5C86AA1C60BB49001CD0CB /* Pathwayz-Pin.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		AA5B60591C640C37008DEB71 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		AA5B605B1C640C9B008DEB71 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		AA5B605D1C643A2D008DEB71 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		AA5B60601C655412008DEB71 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Pathwayz-Pin.png"; path = "../../Assets/Pathwayz/Pathwayz-Pin.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,19 +77,28 @@
 		AA3AD81B1C54E04A00318BDE /* Pathwayz */ = {
 			isa = PBXGroup;
 			children = (
-				AA5B60581C640C10008DEB71 /* Pathwayz.entitlements */,
+				AA5B60601C655412008DEB71 /* Images.xcassets */,
 				AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */,
+				AA5B605F1C646B7F008DEB71 /* images */,
+				AA5B60581C640C10008DEB71 /* Pathwayz.entitlements */,
 				AA3AD81C1C54E04A00318BDE /* AppDelegate.swift */,
+				AA5B60561C635D3E008DEB71 /* AddSavedPinViewController.swift */,
 				AA3AD81E1C54E04A00318BDE /* MapViewController.swift */,
 				AA3AD8201C54E04A00318BDE /* Main.storyboard */,
 				AA3AD8231C54E04A00318BDE /* Assets.xcassets */,
 				AA3AD8251C54E04A00318BDE /* LaunchScreen.storyboard */,
 				AA3AD8281C54E04A00318BDE /* Info.plist */,
 				AA5B60541C635BE2008DEB71 /* SavedPin.swift */,
-				AA5B60561C635D3E008DEB71 /* AddSavedPinViewController.swift */,
 				AA5B605D1C643A2D008DEB71 /* Utilities.swift */,
 			);
 			path = Pathwayz;
+			sourceTree = "<group>";
+		};
+		AA5B605F1C646B7F008DEB71 /* images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA3AD8271C54E04A00318BDE /* LaunchScreen.storyboard in Resources */,
+				AA5B60611C655412008DEB71 /* Images.xcassets in Resources */,
 				AA3AD8241C54E04A00318BDE /* Assets.xcassets in Resources */,
 				AA3AD8221C54E04A00318BDE /* Main.storyboard in Resources */,
 				AA5C86AA1C60BB49001CD0CB /* Pathwayz-Pin.png in Resources */,
