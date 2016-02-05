@@ -24,11 +24,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     // Outlets
     
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var locationCount: UITextField!
     
-    @IBOutlet weak var accuracyField: UITextField!
-    @IBOutlet weak var speedField: UITextField!
-    @IBOutlet weak var scaleField: UITextField!
+    
+//    @IBOutlet weak var locationCount: UITextField!
+//    @IBOutlet weak var accuracyField: UITextField!
+//    @IBOutlet weak var speedField: UITextField!
+//    @IBOutlet weak var scaleField: UITextField!
     
     @IBOutlet weak var btnAddPin: UIButton!
     @IBOutlet weak var pinImage: UIImageView!
@@ -113,8 +114,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
 
          let locValue:CLLocationCoordinate2D = locations[0].coordinate
         
-        self.speedField.text = String(locations[0].speed)
-        self.accuracyField.text = String(locations[0].horizontalAccuracy)
+//        self.speedField.text = String(locations[0].speed)
+//        self.accuracyField.text = String(locations[0].horizontalAccuracy)
 
         
         if (locations[0].horizontalAccuracy <= 75.0)
@@ -142,7 +143,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
             
         }
         
-        self.locationCount.text = String(self.myLocations.count)
+//        self.locationCount.text = String(self.myLocations.count)
         
         let polyline = MKPolyline(coordinates: &myLocations, count: self.myLocations.count)
         self.mapView.addOverlay(polyline)
@@ -378,7 +379,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
 //        mapView.
         
         self.currentZoomScale = CGFloat(mapView.bounds.size.width) / CGFloat(mapView.visibleMapRect.size.width)
-        self.scaleField.text = String(currentZoomScale!)
+//        self.scaleField.text = String(currentZoomScale!)
     }
     
     

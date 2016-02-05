@@ -41,7 +41,7 @@ class AddSavedPinViewController: UIViewController {
         
 //        tableView.tableFooterView = UIView()
         
-        cancelButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+//        cancelButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         
         self.view.backgroundColor = UIColor(colorLiteralRed: 255/255, green: 255/255, blue: 255/255, alpha: 0.9)
         self.view.layer.cornerRadius = 10
