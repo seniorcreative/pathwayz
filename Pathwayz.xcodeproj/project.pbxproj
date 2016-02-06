@@ -19,6 +19,7 @@
 		AA5B605C1C640C9B008DEB71 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5B605B1C640C9B008DEB71 /* MapKit.framework */; };
 		AA5B605E1C643A2D008DEB71 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B605D1C643A2D008DEB71 /* Utilities.swift */; };
 		AA5B60611C655412008DEB71 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5B60601C655412008DEB71 /* Images.xcassets */; };
+		AA5B60831C657B07008DEB71 /* Path-Tab-Image.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5B60821C657B07008DEB71 /* Path-Tab-Image.png */; };
 		AA5C86AA1C60BB49001CD0CB /* Pathwayz-Pin.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		AA5B605B1C640C9B008DEB71 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		AA5B605D1C643A2D008DEB71 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		AA5B60601C655412008DEB71 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AA5B60821C657B07008DEB71 /* Path-Tab-Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Path-Tab-Image.png"; sourceTree = "<group>"; };
 		AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Pathwayz-Pin.png"; path = "../../Assets/Pathwayz/Pathwayz-Pin.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,7 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				AA5B60601C655412008DEB71 /* Images.xcassets */,
-				AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */,
 				AA5B605F1C646B7F008DEB71 /* images */,
 				AA5B60581C640C10008DEB71 /* Pathwayz.entitlements */,
 				AA3AD81C1C54E04A00318BDE /* AppDelegate.swift */,
@@ -97,6 +98,8 @@
 		AA5B605F1C646B7F008DEB71 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */,
+				AA5B60821C657B07008DEB71 /* Path-Tab-Image.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 			files = (
 				AA3AD8271C54E04A00318BDE /* LaunchScreen.storyboard in Resources */,
 				AA5B60611C655412008DEB71 /* Images.xcassets in Resources */,
+				AA5B60831C657B07008DEB71 /* Path-Tab-Image.png in Resources */,
 				AA3AD8241C54E04A00318BDE /* Assets.xcassets in Resources */,
 				AA3AD8221C54E04A00318BDE /* Main.storyboard in Resources */,
 				AA5C86AA1C60BB49001CD0CB /* Pathwayz-Pin.png in Resources */,

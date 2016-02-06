@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yiQ-QR-gNM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EBh-Zm-iuJ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -7,10 +7,11 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Paths-->
         <scene sceneID="C0O-zo-4oE">
             <objects>
                 <navigationController id="yiQ-QR-gNM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Paths" id="Uzj-cL-b4d"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FBj-w2-Lqq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -85,6 +86,7 @@
                             <constraint firstItem="1r4-K7-QrN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="xOd-PF-BHV"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="P6z-Ez-qqK"/>
                     <navigationItem key="navigationItem" title="Your Path Today" id="blG-Bm-dfX"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -97,6 +99,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-79.5" y="-536.5"/>
+        </scene>
+        <!--Friends-->
+        <scene sceneID="HYh-O9-x5U">
+            <objects>
+                <tableViewController id="A7a-zK-lkV" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ez4-f4-roV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tPK-iK-CBE">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tPK-iK-CBE" id="ZEo-R1-C5A">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="A7a-zK-lkV" id="3pF-RR-aOc"/>
+                            <outlet property="delegate" destination="A7a-zK-lkV" id="icM-8r-1ik"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Friends" id="so1-Vl-Np7"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="24r-HJ-34N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-306.5" y="394.5"/>
         </scene>
         <!--Add Saved Pin View Controller-->
         <scene sceneID="Mkj-2T-s32">
@@ -195,6 +226,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qor-iW-dbc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="344.5" y="-455"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="qHV-YF-ihm">
+            <objects>
+                <tabBarController id="EBh-Zm-iuJ" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="z9h-GD-bY7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="yiQ-QR-gNM" kind="relationship" relationship="viewControllers" id="SZE-6M-njZ"/>
+                        <segue destination="A7a-zK-lkV" kind="relationship" relationship="viewControllers" id="qRS-Z0-Kw6"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TDf-nQ-OFg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1261" y="-735"/>
         </scene>
     </scenes>
     <resources>
