@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import CloudKit
+import CoreData
 
 
 
@@ -17,9 +18,12 @@ import CloudKit
 let kSavedItemsKey      = "savedPins"
 let kSavedLocationsKey  = "savedLocations"
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPinsViewControllerDelegate, MKMapViewDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPinsViewControllerDelegate, MKMapViewDelegate, UIAlertViewDelegate {
 
     
+    // Have this verbose line at the top for access to core data throughout app.
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var myStoredLocations : [LocationModel] = []
     
     // Outlets
     
@@ -40,25 +44,31 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     let regionRadius: CLLocationDistance = 50
     let locationManager:CLLocationManager = CLLocationManager()
     
+    let fileIO : FileIO = FileIO()
+    
     // Vars
     
     var myLocations: [CLLocationCoordinate2D] = []
     var currentZoomScale : MKZoomScale? = 1
     var savedPins = [SavedPin]()
-    
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         if CLLocationManager.locationServicesEnabled() {
-                
+            
+            
+                // For more information on Location updates in foreground and background see:
+                // https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/index.html#//apple_ref/occ/instm/CLLocationManager/pausesLocationUpdatesAutomatically
+            
                 self.locationManager.delegate = self
                 self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
                 self.locationManager.startUpdatingLocation()
 //                self.locationManager.startUpdatingHeading()
-//                self.locationManager.startMonitoringSignificantLocationChanges()
+                self.locationManager.startMonitoringSignificantLocationChanges()
+                self.locationManager.pausesLocationUpdatesAutomatically = true
                 self.locationManager.distanceFilter = 10
             
                 //self.mapView setup to show user location
@@ -79,11 +89,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     
     
         loadAllPins()
-        loadAllLocations()
+//        loadAllLocations() //  NSKeyed Method
+        loadLocations() // Core Data Method (persistent)
         
+        loadFriends()
         
     }
     
+   
     
     /// Custom methods
     
@@ -112,18 +125,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         
         // check for reading of accuracy, and reachability and only use location based on satisfaction of rules.
 
-         let locValue:CLLocationCoordinate2D = locations[0].coordinate
-        
-//        self.speedField.text = String(locations[0].speed)
-//        self.accuracyField.text = String(locations[0].horizontalAccuracy)
+        let locValue:CLLocationCoordinate2D = locations[0].coordinate
 
         
         if (locations[0].horizontalAccuracy <= 75.0)
         {
 
-            myLocations.append(locValue)
+//            myLocations.append(locValue)
+//            
+//            saveAllLocations()
             
-            saveAllLocations()
+            addLocation(locValue)
      
         }
         
@@ -139,11 +151,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
                 }
             }
             
-            // self.mapView.removeOverlay(self.mapView.overlays[0])
-            
         }
-        
-//        self.locationCount.text = String(self.myLocations.count)
         
         let polyline = MKPolyline(coordinates: &myLocations, count: self.myLocations.count)
         self.mapView.addOverlay(polyline)
@@ -155,6 +163,78 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         
     }
     
+    // MARK : CORE DATA SAVING
+    
+    func addLocation(locValue: CLLocationCoordinate2D)
+    {
+        
+        
+        let insertedLocationItem = NSEntityDescription.insertNewObjectForEntityForName("LocationModel", inManagedObjectContext: self.managedObjectContext) as? LocationModel
+        
+        if (insertedLocationItem != nil)
+        {
+            
+            insertedLocationItem?.lat = locValue.latitude
+            insertedLocationItem?.long = locValue.longitude
+            
+            do
+            {
+                try self.managedObjectContext.save()
+                
+                loadLocations()
+            }
+            catch
+            {
+                print("Error with saving locations into Core Data caught")
+            }
+            
+        }
+        
+    }
+    
+    
+    func loadLocations ()
+    {
+        
+        let fetchRequest = NSFetchRequest(entityName: "LocationModel")
+        
+        do
+        {
+            let myLocationsLoaded = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [LocationModel]
+            
+            if(myLocationsLoaded != nil)
+            {
+                
+                var locationCoords : [CLLocationCoordinate2D] = []
+                
+                for locationLoaded in myLocationsLoaded!
+                {
+                    
+                    locationCoords.append(CLLocationCoordinate2D(latitude: Double(locationLoaded.lat!), longitude: Double(locationLoaded.long!)))
+                    
+                }
+                
+                self.myLocations = locationCoords
+                
+            }
+            
+            
+        }
+        catch
+        {
+            //
+            print ("Error fetching locations Data")
+        }
+        
+        
+        
+    }
+    
+    
+    
+    ///
+    
+    
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         
         print("Error in location manager \(error)")
@@ -164,6 +244,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     @IBAction func showAddPinVC(sender: AnyObject) {
         
         self.pinImage.hidden = false
+        
         centerMapOnLocation(locationManager.location!)
         
         let destinationVC = self.childViewControllers[0] as? AddSavedPinViewController
@@ -185,6 +266,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     func hideAddPinVC()
     {
         
+        self.pinImage.hidden = true
         
         UIView.animateWithDuration(0.5, delay: 0.1, options: [.CurveEaseInOut], animations: {
             self.addPinContainer.frame.origin.y = -300
@@ -194,130 +276,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
                 (finished: Bool) in
                 if (finished)
                 {
-//                    print("animation out finished")
                     self.addPinContainer.hidden = true
                     self.btnAddPin.enabled = true
+
                 }
             }
             
-            
+
          )
         
     }
-    
-    /*
-    func data_request()
-    {
-        let url:NSURL = NSURL(string: url_to_request)!
-        let session = NSURLSession.sharedSession()
-        
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
-        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringCacheData
-        
-        let paramString = "data=Hello"
-        request.HTTPBody = paramString.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        let task = session.dataTaskWithRequest(request) {
-            (
-            let data, let response, let error) in
-            
-            guard let ​_:NSData = data, let _​:NSURLResponse = response  where error == nil else {
-                print("error")
-                return
-            }
-            
-            let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            print(dataString)
-            
-        }
-        
-        task.resume()
-        
-    }
-    */
-    
-    
-//    @IBAction func pinSaved(sender: AnyObject) {
-//        
-//        self.pinImage.hidden = true
-////        self.buttonLocationDone.hidden = true
-//
-////        var Stream : NSOutputStream
-//
-//        var locationsObject : NSMutableArray = []
-//        
-//        for var location : CLLocationCoordinate2D in myLocations
-//        {
-//            var locationDict : NSDictionary = ["lat": location.latitude, "long": location.longitude]
-//            
-//            locationsObject.addObject(locationDict)
-//        }
-//        
-//        
-//        do
-//        {
-//            
-////            let wrappedDict : NSDictionary = ["Data" : locationsObject]
-//            
-//            let dataExample : NSData = NSKeyedArchiver.archivedDataWithRootObject(locationsObject)
-////            
-////            var jsonString = try NSJSONSerialization.JSONObjectWithData(locationsObject!, options: NSJSONReadingOptions)(locationsObject, options: .PrettyPrinted)
-//            
-////            let string = NSString(data: jsonString!, encoding: NSUTF8StringEncoding)
-//            
-//            
-//            
-//            
-//            let url:NSURL = NSURL(string: "http://seniorcreative.com/data/testpost.php")!
-//            let session = NSURLSession.sharedSession()
-//            
-//            let request = NSMutableURLRequest(URL: url)
-//            request.HTTPMethod = "POST"
-//            request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringCacheData
-//            
-////            let paramString = "data=Hello"
-//            
-////            print(dataExample)
-//            print(locationsObject)
-//            
-//            request.HTTPBody = dataExample // paramString.dataUsingEncoding(NSUTF8StringEncoding)
-////            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-////            request.addValue("application/json", forHTTPHeaderField: "Accept")
-//
-//            
-//            let task = session.dataTaskWithRequest(request) {
-//                (
-//                let data, let response, let error) in
-//                
-//                guard let ​_:NSData = data, let _​:NSURLResponse = response  where error == nil else {
-//                    print("error")
-//                    return
-//                }
-//                
-//                let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-//                print(dataString)
-//                
-//            }
-//            
-//            task.resume()
-//            
-////            var dictionaryExample : [String:AnyObject] = ["user":"UserName", "pass":"password", "token":"0123456789", "image":0] // image should be either NSData or empty
-////            let dataExample : NSData = NSKeyedArchiver.archivedDataWithRootObject(dictionaryExample)
-////            let dictionary:NSDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(dataExample)! as NSDictionary
-//            
-//            
-//        }
-//        catch
-//        {
-//            
-//        }
-//    
-//        
-//    }
-    
-    
-    
+
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "mySavedPin"
@@ -337,7 +306,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         }
         return nil
     }
-    
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         // Delete savedPin
@@ -360,8 +328,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         } else if (overlay is MKCircle) {
             let circleRenderer = MKCircleRenderer(overlay: overlay)
             circleRenderer.lineWidth = 1.0
-            circleRenderer.strokeColor = UIColor.purpleColor()
-            circleRenderer.fillColor = UIColor.purpleColor().colorWithAlphaComponent(0.4)
+            circleRenderer.strokeColor = UIColor.yellowColor()
+            circleRenderer.fillColor = UIColor.yellowColor().colorWithAlphaComponent(0.4)
             return circleRenderer
         }
         else
@@ -479,10 +447,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
             NSUserDefaults.standardUserDefaults().setObject(locations, forKey: kSavedLocationsKey)
             NSUserDefaults.standardUserDefaults().synchronize()
         }
-        
-    
-    
-    
     
     
     ///
@@ -557,6 +521,104 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
                 }
             }
         }
+    }
+    
+    func loadFriends()
+    {
+        
+        var url = NSURL(string: "http://seniorcreative.com.au/data/friends.json")
+        
+        
+        
+        var task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) -> Void in
+            
+            if (error == nil)
+            {
+                
+                do
+                {
+                    
+                    
+//                    let jsonEncodedArray = try NSJSONSerialization.dataWithJSONObject(splitArray, options: .PrettyPrinted)
+                    
+                    let jsonString = NSString(data: data!, encoding: NSUTF8StringEncoding) as! String
+                    self.fileIO.write("json.txt", withData: jsonString)
+                    
+//                    var jsonObject = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+//                    
+//                    if var responseDict = jsonObject as? NSDictionary
+//                    {
+//                        
+//                        let friendArray  = responseDict["friends"] as! NSArray
+//                        
+//                        
+//                        for friend in friendArray
+//                        {
+//                            print("Added friend")
+//                            
+//                            let friendToAdd = [
+//                                "name":friend["name"]! as! String,
+//                                "shortname":friend["shortname"]! as! String,
+//                                "locationPaths":friend["locationPathArray"]! as! NSArray
+//                            ]
+//                            
+////                            self.friends.addObject(friendToAdd)
+//                            
+//                        }
+//                        
+//                        print(self.friends)
+//                        
+//                        self.tableView.reloadData()
+//                        
+//                    }
+                    
+                    
+                    
+                }
+                catch
+                {
+                    
+                }
+                
+            }
+            else
+            {
+                // there was an error with the data
+            }
+            
+        }
+        
+        task.resume()
+        
+        
+    }
+    
+    // see above the colon for selector means our function has one parameter
+    func resetPaths()
+    {
+        print("Reset paths notification received")
+        
+        let alertView = UIAlertController(title: "Pathwayz Cleared", message: "Your pathwayz have now been reset", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        //        alertView.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler: nil))
+        
+        self.presentViewController(alertView, animated: true, completion: nil)
+        
+        if(self.mapView.overlays.count > 0)
+        {
+            for overlay in self.mapView.overlays
+            {
+                let overlayType = overlay as? MKPolyline
+                
+                if (overlayType != nil)
+                {
+                    self.mapView.removeOverlay(overlay)
+                }
+            }
+            
+        }
+        
+        self.myLocations = []
     }
     
 

@@ -25,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="-600.5" y="-486.5"/>
         </scene>
-        <!--Your Path Today-->
+        <!--Your Path-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Pathwayz" customModuleProvider="target" sceneMemberID="viewController">
@@ -86,8 +86,8 @@
                             <constraint firstItem="1r4-K7-QrN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="xOd-PF-BHV"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="P6z-Ez-qqK"/>
-                    <navigationItem key="navigationItem" title="Your Path Today" id="blG-Bm-dfX"/>
+                    <tabBarItem key="tabBarItem" title="Paths" image="Path Tab Icon" id="P6z-Ez-qqK"/>
+                    <navigationItem key="navigationItem" title="Your Path" id="blG-Bm-dfX"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="addPinContainer" destination="h6X-M1-DMn" id="lNn-eo-LYb"/>
@@ -100,21 +100,54 @@
             </objects>
             <point key="canvasLocation" x="-79.5" y="-536.5"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="7mJ-e7-Tmi">
+            <objects>
+                <navigationController id="CK8-d3-FPK" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Efl-NI-gvP"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ObA-2L-XDe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="A7a-zK-lkV" kind="relationship" relationship="rootViewController" id="RQT-i4-RfG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hb9-bE-FYs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-593.5" y="343.5"/>
+        </scene>
         <!--Friends-->
         <scene sceneID="HYh-O9-x5U">
             <objects>
-                <tableViewController id="A7a-zK-lkV" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ez4-f4-roV">
+                <tableViewController id="A7a-zK-lkV" customClass="FriendsTableViewController" customModule="Pathwayz" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="81" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ez4-f4-roV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tPK-iK-CBE">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendCell" textLabel="YKB-AQ-YvW" detailTextLabel="K5k-Hj-1z9" rowHeight="81" style="IBUITableViewCellStyleSubtitle" id="tPK-iK-CBE">
+                                <rect key="frame" x="0.0" y="92" width="375" height="81"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tPK-iK-CBE" id="ZEo-R1-C5A">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YKB-AQ-YvW">
+                                            <rect key="frame" x="15" y="19" width="46" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K5k-Hj-1z9">
+                                            <rect key="frame" x="15" y="48" width="33" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -123,16 +156,75 @@
                             <outlet property="delegate" destination="A7a-zK-lkV" id="icM-8r-1ik"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Friends" id="so1-Vl-Np7"/>
+                    <tabBarItem key="tabBarItem" title="Friends" image="Friend Tab Icon" id="so1-Vl-Np7"/>
+                    <navigationItem key="navigationItem" title="Friends" id="mcG-Ru-oK0"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="24r-HJ-34N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-306.5" y="394.5"/>
+            <point key="canvasLocation" x="-87.5" y="352.5"/>
+        </scene>
+        <!--Reset-->
+        <scene sceneID="fuH-3C-KBV">
+            <objects>
+                <viewController id="n3f-Mm-8hv" customClass="ResetViewController" customModule="Pathwayz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Fu-eu-q22"/>
+                        <viewControllerLayoutGuide type="bottom" id="GrB-oE-oKt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="egJ-bc-EFc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9U-ph-yEJ">
+                                <rect key="frame" x="24" y="94" width="327" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Clear Pathwayz"/>
+                                <connections>
+                                    <action selector="resetButtonAction:" destination="n3f-Mm-8hv" eventType="touchUpInside" id="Mm7-X3-vG2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="d9U-ph-yEJ" firstAttribute="leading" secondItem="egJ-bc-EFc" secondAttribute="leadingMargin" constant="4" id="38g-VB-BLV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="d9U-ph-yEJ" secondAttribute="trailing" constant="4" id="G8b-hE-mZy"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Reset" image="Reset Tab Icon" id="2sw-1Q-VYh"/>
+                    <navigationItem key="navigationItem" title="Reset" id="vrC-cB-73r"/>
+                    <connections>
+                        <outlet property="resetButton" destination="d9U-ph-yEJ" id="niZ-AG-gzD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1i9-rn-pQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1702.5" y="290.5"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="Jki-L7-LMd">
+            <objects>
+                <navigationController id="bfT-Mx-QRU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="x6D-E2-BAr"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wdl-ME-yWf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="n3f-Mm-8hv" kind="relationship" relationship="rootViewController" id="iCa-WL-CPG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vy6-J6-8QL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2191" y="-36"/>
         </scene>
         <!--Add Saved Pin View Controller-->
         <scene sceneID="Mkj-2T-s32">
             <objects>
                 <viewController id="jEa-mE-31m" customClass="AddSavedPinViewController" customModule="Pathwayz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dv7-ve-34I"/>
+                        <viewControllerLayoutGuide type="bottom" id="06C-O2-1f1"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rFq-OP-Xk2">
                         <rect key="frame" x="0.0" y="0.0" width="329" height="112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -151,7 +243,7 @@
                                     <constraint firstAttribute="height" constant="21" id="uj2-hy-eDx"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="as3-F6-2g6">
@@ -239,15 +331,19 @@
                     </tabBar>
                     <connections>
                         <segue destination="yiQ-QR-gNM" kind="relationship" relationship="viewControllers" id="SZE-6M-njZ"/>
-                        <segue destination="A7a-zK-lkV" kind="relationship" relationship="viewControllers" id="qRS-Z0-Kw6"/>
+                        <segue destination="CK8-d3-FPK" kind="relationship" relationship="viewControllers" id="OxQ-X1-Lsr"/>
+                        <segue destination="bfT-Mx-QRU" kind="relationship" relationship="viewControllers" id="5Vh-d9-gaV"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TDf-nQ-OFg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1261" y="-735"/>
+            <point key="canvasLocation" x="-1253.5" y="-651.5"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Friend Tab Icon" width="25" height="25"/>
+        <image name="Path Tab Icon" width="25" height="25"/>
         <image name="Pathwayz-Pin.png" width="1024" height="1024"/>
+        <image name="Reset Tab Icon" width="25" height="25"/>
     </resources>
 </document>
