@@ -56,7 +56,7 @@ class FriendsTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("friendCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("friendCell", forIndexPath: indexPath) as! CustomTableViewCell
         
         let friendItem = self.friends[indexPath.row]
         
@@ -64,8 +64,12 @@ class FriendsTableViewController: UITableViewController {
 
         // Configure the cell...
         
-        cell.textLabel!.text        = friendItem["shortname"] as! String
-        cell.detailTextLabel!.text  = friendItem["name"] as! String
+        cell.setNameIconColor(friendItem["color"] as! NSArray)
+        cell.setVisible(friendItem["visible"] as! Int)
+        
+        cell.title!.text        = friendItem["shortname"] as! String
+        cell.subtitle!.text     = friendItem["name"] as! String
+        
 
         return cell
     }
@@ -120,8 +124,7 @@ class FriendsTableViewController: UITableViewController {
     {
         
         let jsonRead : String = fileIO.read("json.txt")
-        
-        print("got your json \(jsonRead)")
+//        print("got your json \(jsonRead)")
         
         do
         {
@@ -133,21 +136,17 @@ class FriendsTableViewController: UITableViewController {
                 
                 for item in items
                 {
-                    print("item \(item)")
+//                    print("item \(item)")
                     friends.addObject(item)
                     
                 }
                 
-                print("length of friends \(self.friends.count)")
+//                print("length of friends \(self.friends.count)")
                 
                 self.tableView.reloadData()
                 
-                
-                
-                
+    
             }
-            
-            
             
             
         }

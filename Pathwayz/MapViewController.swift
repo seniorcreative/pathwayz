@@ -526,11 +526,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     func loadFriends()
     {
         
-        var url = NSURL(string: "http://seniorcreative.com.au/data/friends.json")
-        
-        
-        
-        var task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) -> Void in
+        let url = NSURL(string: "http://seniorcreative.com.au/data/friends.json")
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) -> Void in
             
             if (error == nil)
             {
@@ -538,40 +535,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
                 do
                 {
                     
-                    
-//                    let jsonEncodedArray = try NSJSONSerialization.dataWithJSONObject(splitArray, options: .PrettyPrinted)
-                    
                     let jsonString = NSString(data: data!, encoding: NSUTF8StringEncoding) as! String
                     self.fileIO.write("json.txt", withData: jsonString)
-                    
-//                    var jsonObject = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
-//                    
-//                    if var responseDict = jsonObject as? NSDictionary
-//                    {
-//                        
-//                        let friendArray  = responseDict["friends"] as! NSArray
-//                        
-//                        
-//                        for friend in friendArray
-//                        {
-//                            print("Added friend")
-//                            
-//                            let friendToAdd = [
-//                                "name":friend["name"]! as! String,
-//                                "shortname":friend["shortname"]! as! String,
-//                                "locationPaths":friend["locationPathArray"]! as! NSArray
-//                            ]
-//                            
-////                            self.friends.addObject(friendToAdd)
-//                            
-//                        }
-//                        
-//                        print(self.friends)
-//                        
-//                        self.tableView.reloadData()
-//                        
-//                    }
-                    
                     
                     
                 }

@@ -51,7 +51,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>background message</string>
+	<string>Important for alerting when crossing pathwayz with friends</string>
 	<key>NSLocationUsageDescription</key>
 	<string>I need location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

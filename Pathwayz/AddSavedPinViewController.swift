@@ -73,7 +73,18 @@ class AddSavedPinViewController: UIViewController {
     
     @IBAction private func onAdd(sender: AnyObject) {
 //        let coordinate = mapView.centerCoordinate
-        let radius = 100.0 // (radiusTextField.text! as NSString).doubleValue
+        
+        
+        
+        var radius = 100.0
+
+        if (NSUserDefaults.standardUserDefaults().objectForKey("radiusSize") != nil) {
+        
+            radius = NSUserDefaults.standardUserDefaults().doubleForKey("radiusSize")
+            
+        }
+        
+        
         let identifier = NSUUID().UUIDString
         
         let date = NSDate()

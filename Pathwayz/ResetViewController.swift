@@ -19,6 +19,11 @@ class ResetViewController: UIViewController {
     // Have this verbose line at the top for access to core data throughout app.
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var myStoredLocations : [LocationModel] = []
+    
+    
+    @IBOutlet weak var radiusSlider: UISlider!
+    
+    
 
     @IBOutlet weak var resetButton: UIButton!
     
@@ -73,6 +78,15 @@ class ResetViewController: UIViewController {
         
     }
     
+    
+    
+    @IBAction func buttonSave(sender: AnyObject) {
+        
+        
+        NSUserDefaults.standardUserDefaults().setObject(radiusSlider.value * 10, forKey: "radiusSize")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+    }
     
 
     /*

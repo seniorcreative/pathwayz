@@ -28,6 +28,7 @@
 		AA5B60891C65C1CE008DEB71 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B60881C65C1CE008DEB71 /* Friend.swift */; };
 		AA5B608B1C680A71008DEB71 /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B608A1C680A71008DEB71 /* ResetViewController.swift */; };
 		AA5C86AA1C60BB49001CD0CB /* Pathwayz-Pin.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */; };
+		AA680A061C69F3E200CABB71 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA680A051C69F3E200CABB71 /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		AA5B60881C65C1CE008DEB71 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		AA5B608A1C680A71008DEB71 /* ResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetViewController.swift; sourceTree = "<group>"; };
 		AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Pathwayz-Pin.png"; path = "../../Assets/Pathwayz/Pathwayz-Pin.png"; sourceTree = "<group>"; };
+		AA680A051C69F3E200CABB71 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				AA5B60881C65C1CE008DEB71 /* Friend.swift */,
 				AA5B608A1C680A71008DEB71 /* ResetViewController.swift */,
 				AA293FE21C6893DC00A5C71C /* FileIO.swift */,
+				AA680A051C69F3E200CABB71 /* CustomTableViewCell.swift */,
 			);
 			path = Pathwayz;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				AA293FE31C6893DC00A5C71C /* FileIO.swift in Sources */,
 				AA293FE81C689BD000A5C71C /* LocationModel.xcdatamodeld in Sources */,
 				AA5B60571C635D3E008DEB71 /* AddSavedPinViewController.swift in Sources */,
+				AA680A061C69F3E200CABB71 /* CustomTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
