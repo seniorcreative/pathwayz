@@ -28,6 +28,7 @@
 		AA5B60891C65C1CE008DEB71 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B60881C65C1CE008DEB71 /* Friend.swift */; };
 		AA5B608B1C680A71008DEB71 /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B608A1C680A71008DEB71 /* ResetViewController.swift */; };
 		AA5C86AA1C60BB49001CD0CB /* Pathwayz-Pin.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */; };
+		AA5CC7D01C6B29C400C48C38 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5CC7CF1C6B29C400C48C38 /* HockeySDK.framework */; };
 		AA680A061C69F3E200CABB71 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA680A051C69F3E200CABB71 /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		AA5B60881C65C1CE008DEB71 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		AA5B608A1C680A71008DEB71 /* ResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetViewController.swift; sourceTree = "<group>"; };
 		AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Pathwayz-Pin.png"; path = "../../Assets/Pathwayz/Pathwayz-Pin.png"; sourceTree = "<group>"; };
+		AA5CC7CF1C6B29C400C48C38 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
 		AA680A051C69F3E200CABB71 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA5CC7D01C6B29C400C48C38 /* HockeySDK.framework in Frameworks */,
 				AA293FE51C689B8200A5C71C /* CoreData.framework in Frameworks */,
 				AA3AD82F1C5589ED00318BDE /* CoreLocation.framework in Frameworks */,
 				AA5B605C1C640C9B008DEB71 /* MapKit.framework in Frameworks */,
@@ -77,6 +80,7 @@
 		AA3AD8101C54E04A00318BDE = {
 			isa = PBXGroup;
 			children = (
+				AA5CC7CF1C6B29C400C48C38 /* HockeySDK.framework */,
 				AA293FE91C689E8C00A5C71C /* LocationModel+CoreDataProperties.swift */,
 				AA293FEA1C689E8C00A5C71C /* LocationModel.swift */,
 				AA293FE41C689B8200A5C71C /* CoreData.framework */,
@@ -337,6 +341,10 @@
 				CODE_SIGN_ENTITLEMENTS = Pathwayz/Pathwayz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
 				INFOPLIST_FILE = Pathwayz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seniorcreative.Pathwayz;
@@ -352,6 +360,10 @@
 				CODE_SIGN_ENTITLEMENTS = Pathwayz/Pathwayz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
 				INFOPLIST_FILE = Pathwayz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seniorcreative.Pathwayz;

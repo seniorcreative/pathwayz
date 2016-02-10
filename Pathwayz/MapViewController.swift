@@ -20,6 +20,7 @@ let kSavedLocationsKey  = "savedLocations"
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPinsViewControllerDelegate, MKMapViewDelegate, UIAlertViewDelegate {
 
+    @IBOutlet weak var iconBackground1: UIView!
     
     // Have this verbose line at the top for access to core data throughout app.
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -39,6 +40,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     @IBOutlet weak var pinImage: UIImageView!
     @IBOutlet weak var addPinContainer: UIView!
     
+    @IBOutlet weak var iconView1: UIView!
+    
+    
     // Constants
     
     let regionRadius: CLLocationDistance = 50
@@ -51,6 +55,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     var myLocations: [CLLocationCoordinate2D] = []
     var currentZoomScale : MKZoomScale? = 1
     var savedPins = [SavedPin]()
+    
+    
 
     
     override func viewDidLoad() {
@@ -93,6 +99,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         loadLocations() // Core Data Method (persistent)
         
         loadFriends()
+        
+        
+        
+        iconBackground1.layer.cornerRadius = iconBackground1.layer.visibleRect.height / 2
+        
+        
+        // Position the name / colour icon outside so it can be ready to be moved in.
+        var iconView1Frame = self.iconView1.frame
+        iconView1Frame.origin.x -= 100
+        self.iconView1.frame = iconView1Frame
+        
+        
+        // Animate the icon in.
+        UIView.animateWithDuration(0.4, delay: 2.0, options: .CurveEaseOut, animations: {
+            
+            var iconView1Frame = self.iconView1.frame
+            iconView1Frame.origin.x += 100
+            self.iconView1.frame = iconView1Frame
+            
+            }, completion: { finished in
+                print("Icon moved in")
+        })
+        
         
     }
     
@@ -256,10 +285,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         
         btnAddPin.enabled = false
        
-        UIView.animateWithDuration(0.5, delay: 0.1, options: [.CurveEaseInOut], animations: {
+        UIView.animateWithDuration(0.5, delay: 0.3, options: [.CurveEaseInOut], animations: {
             self.addPinContainer.frame.origin.y = 80
             self.addPinContainer.alpha = 1.0
         }, completion: nil)
+        
+        
+        UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseIn, animations: {
+            
+            var iconView1Frame = self.iconView1.frame
+            iconView1Frame.origin.x -= 100
+            self.iconView1.frame = iconView1Frame
+            
+            }, completion: { finished in
+                print("Icon moved out")
+        })
         
     }
     
@@ -284,6 +324,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
             
 
          )
+        
+        UIView.animateWithDuration(0.4, delay: 0.5, options: .CurveEaseOut, animations: {
+            
+            var iconView1Frame = self.iconView1.frame
+            iconView1Frame.origin.x += 100
+            self.iconView1.frame = iconView1Frame
+            
+            }, completion: { finished in
+                print("Icon moved back in again")
+        })
         
     }
 

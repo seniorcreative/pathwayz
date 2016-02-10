@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import CoreData
+import HockeySDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
@@ -26,6 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
         UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
+        
+        let sharedHockeyManager = BITHockeyManager.sharedHockeyManager()
+        sharedHockeyManager.configureWithIdentifier("9d3ee2366df6498abdb10a91b0263313")
+        sharedHockeyManager.startManager()
+        sharedHockeyManager.authenticator.authenticateInstallation()
         
         return true
     }
