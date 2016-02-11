@@ -43,7 +43,7 @@ class AddSavedPinViewController: UIViewController {
         
 //        cancelButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         
-        self.view.backgroundColor = UIColor(colorLiteralRed: 255/255, green: 255/255, blue: 255/255, alpha: 0)
+        self.view.backgroundColor = UIColor(colorLiteralRed: 200/255, green: 200/255, blue: 200/255, alpha: 0.8)
         self.view.layer.cornerRadius = 10
         
         
@@ -82,6 +82,8 @@ class AddSavedPinViewController: UIViewController {
         if (NSUserDefaults.standardUserDefaults().objectForKey("radiusSize") != nil) {
         
             radius = NSUserDefaults.standardUserDefaults().doubleForKey("radiusSize")
+            
+            radius = round(100 * radius) / 100
             
         }
         

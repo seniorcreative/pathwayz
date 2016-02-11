@@ -89,7 +89,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         }
         
         
-        btnAddPin.backgroundColor = UIColor.yellowColor()
+        btnAddPin.backgroundColor = UIColor(colorLiteralRed: 252/255, green: 255/255, blue: 0/255, alpha: 0.9)
         btnAddPin.setTitleColor(UIColor.blackColor(), forState: .Normal)
         btnAddPin.layer.cornerRadius = btnAddPin.layer.visibleRect.height / 2
     
@@ -274,7 +274,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         
         self.pinImage.hidden = false
         
-        centerMapOnLocation(locationManager.location!)
+        if (locationManager.location != nil)
+        {
+            centerMapOnLocation(locationManager.location!)
+        }
         
         let destinationVC = self.childViewControllers[0] as? AddSavedPinViewController
         destinationVC?.delegate = self

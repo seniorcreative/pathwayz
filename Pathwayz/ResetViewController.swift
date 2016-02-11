@@ -21,10 +21,8 @@ class ResetViewController: UIViewController {
     var myStoredLocations : [LocationModel] = []
     
     
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var radiusSlider: UISlider!
-    
-    
-
     @IBOutlet weak var resetButton: UIButton!
     
 //    var delegate: ResetViewDelegate!
@@ -38,8 +36,12 @@ class ResetViewController: UIViewController {
         
         resetButton.backgroundColor = UIColor.redColor()
         resetButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        
         resetButton.layer.cornerRadius = resetButton.layer.visibleRect.height / 2
+        
+        
+        saveButton.backgroundColor = UIColor.yellowColor()
+        saveButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        saveButton.layer.cornerRadius = saveButton.layer.visibleRect.height/2
         
     }
 

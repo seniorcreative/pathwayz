@@ -78,8 +78,11 @@
                                     </label>
                                 </subviews>
                             </view>
-                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h6X-M1-DMn">
-                                <rect key="frame" x="0.0" y="64" width="375" height="142"/>
+                            <containerView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h6X-M1-DMn">
+                                <rect key="frame" x="0.0" y="64" width="375" height="123"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="rwl-2O-1MJ"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="jEa-mE-31m" kind="embed" identifier="containerSegue" id="4in-7P-Nvg"/>
                                 </connections>
@@ -88,15 +91,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="A7U-EQ-Qwi" secondAttribute="bottom" constant="20" id="6iR-y6-F8W"/>
+                            <constraint firstItem="h6X-M1-DMn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Cpp-g0-GrV"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="A7U-EQ-Qwi" secondAttribute="bottom" constant="49" id="HEy-YG-dYS"/>
-                            <constraint firstItem="h6X-M1-DMn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="R6j-co-Aq9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="h6X-M1-DMn" secondAttribute="trailing" constant="10" id="P7w-Ft-0GI"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1r4-K7-QrN" secondAttribute="bottom" id="RtR-vE-wGB"/>
                             <constraint firstItem="A7U-EQ-Qwi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="67" id="VSc-3R-Bdo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1r4-K7-QrN" secondAttribute="trailing" constant="-20" id="Xve-D9-fDi"/>
+                            <constraint firstItem="h6X-M1-DMn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="Yhc-t0-nIv"/>
                             <constraint firstItem="gwx-lp-6bB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bER-Ca-CmI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="A7U-EQ-Qwi" secondAttribute="trailing" constant="68" id="eMF-08-yYS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="h6X-M1-DMn" secondAttribute="trailing" constant="-20" id="iBI-59-M8e"/>
-                            <constraint firstItem="h6X-M1-DMn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="myQ-p1-8AR"/>
                             <constraint firstItem="1r4-K7-QrN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="qRl-2m-AMW"/>
                             <constraint firstItem="1r4-K7-QrN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="xOd-PF-BHV"/>
                         </constraints>
@@ -147,7 +150,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="81"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tPK-iK-CBE" id="ZEo-R1-C5A">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a0B-Ut-HlA">
@@ -188,7 +191,9 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Friends" image="Friend Tab Icon" id="so1-Vl-Np7"/>
-                    <navigationItem key="navigationItem" title="Friends" id="mcG-Ru-oK0"/>
+                    <navigationItem key="navigationItem" title="Friends" id="mcG-Ru-oK0">
+                        <barButtonItem key="rightBarButtonItem" title="+" id="rpb-Ir-I9K"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="24r-HJ-34N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -226,9 +231,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="10" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="TuB-wO-s4S">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="10" maxValue="100" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TuB-wO-s4S">
                                 <rect key="frame" x="22" y="112" width="331" height="31"/>
-                                <color key="thumbTintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBB-Ak-HTr">
                                 <rect key="frame" x="26" y="150" width="42" height="21"/>
@@ -241,7 +245,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYx-XI-pFN">
-                                <rect key="frame" x="321" y="182" width="34" height="30"/>
+                                <rect key="frame" x="294" y="182" width="61" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="61" id="6AH-Sd-ccF"/>
+                                </constraints>
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="buttonSave:" destination="n3f-Mm-8hv" eventType="touchUpInside" id="lT5-0M-at1"/>
@@ -283,6 +290,7 @@
                     <connections>
                         <outlet property="radiusSlider" destination="TuB-wO-s4S" id="BqT-JH-yZi"/>
                         <outlet property="resetButton" destination="d9U-ph-yEJ" id="niZ-AG-gzD"/>
+                        <outlet property="saveButton" destination="UYx-XI-pFN" id="wyp-b6-1KL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1i9-rn-pQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -315,7 +323,7 @@
                         <viewControllerLayoutGuide type="bottom" id="06C-O2-1f1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rFq-OP-Xk2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="142"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="123"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a note" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jN3-w9-t80">
@@ -366,14 +374,6 @@
                                     <action selector="onCancel:" destination="jEa-mE-31m" eventType="touchUpInside" id="t1z-9k-2e1"/>
                                 </connections>
                             </button>
-                            <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SEF-C4-z8N">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="142"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="ta1-79-kvQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="142"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="xAr-SO-zxb" firstAttribute="top" secondItem="rFq-OP-Xk2" secondAttribute="topMargin" constant="11" id="1zb-g3-fIm"/>
