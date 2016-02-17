@@ -83,7 +83,7 @@ class AddSavedPinViewController: UIViewController {
         
             radius = NSUserDefaults.standardUserDefaults().doubleForKey("radiusSize")
             
-            radius = round(100 * radius) / 100
+            radius = round(10 * radius) / 10
             
         }
         

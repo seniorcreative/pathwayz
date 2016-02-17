@@ -82,7 +82,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
                 self.mapView.showsUserLocation = true
                 self.mapView.showsScale = true
                 //
-                self.mapView.mapType = MKMapType(rawValue: 0)!
+            self.mapView.mapType = MKMapType(rawValue: 0)!
                 self.mapView.userTrackingMode = MKUserTrackingMode.Follow
 //                self.mapView.userTrackingMode = MKUserTrackingMode(rawValue: 2)!
 
@@ -107,7 +107,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         
         // Position the name / colour icon outside so it can be ready to be moved in.
         var iconView1Frame = self.iconView1.frame
-        iconView1Frame.origin.x -= 100
+        iconView1Frame.origin.x = -99
         self.iconView1.frame = iconView1Frame
         
         
@@ -297,7 +297,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseIn, animations: {
             
             var iconView1Frame = self.iconView1.frame
-            iconView1Frame.origin.x -= 100
+            iconView1Frame.origin.x = -99
             self.iconView1.frame = iconView1Frame
             
             }, completion: { finished in
@@ -331,7 +331,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         UIView.animateWithDuration(0.4, delay: 0.5, options: .CurveEaseOut, animations: {
             
             var iconView1Frame = self.iconView1.frame
-            iconView1Frame.origin.x += 100
+            iconView1Frame.origin.x = 9
             self.iconView1.frame = iconView1Frame
             
             }, completion: { finished in
@@ -412,16 +412,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         
         
         self.pinImage.hidden = true
+        
+        
 //        self.buttonLocationDone.hidden = true
 //        self.addPinContainer.hidden = true
-        
 //        controller.dismissViewControllerAnimated(true, completion: nil)
+        
+        
         // 1
         let clampedRadius = (radius > locationManager.maximumRegionMonitoringDistance) ? locationManager.maximumRegionMonitoringDistance : radius
         
         let savedPin = SavedPin(coordinate: coordinate, radius: clampedRadius, identifier: identifier, note: note, eventType: eventType)
         
         addSavedPin(savedPin)
+        
         // 2
         startMonitoringSavedPin(savedPin)
         
@@ -430,6 +434,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         
         //4 
         hideAddPinVC()
+        
     }
     
     // MARK: Loading and saving functions

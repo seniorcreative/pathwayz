@@ -14,12 +14,15 @@ import CoreData
 //    func resetPaths()
 //}
 
-class ResetViewController: UIViewController {
+class ResetViewController: UIViewController, HSBColorPickerDelegate {
     
     // Have this verbose line at the top for access to core data throughout app.
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var myStoredLocations : [LocationModel] = []
     
+    @IBOutlet weak var bgRadCirc: UIView!
+    @IBOutlet weak var topRadCirc: UIView!
+    @IBOutlet weak var radiusValue: UILabel!
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var radiusSlider: UISlider!
@@ -34,14 +37,38 @@ class ResetViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        resetButton.backgroundColor = UIColor.redColor()
-        resetButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        resetButton.layer.cornerRadius = resetButton.layer.visibleRect.height / 2
+//        resetButton.backgroundColor = UIColor.redColor()
+//        resetButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+//        resetButton.layer.cornerRadius = resetButton.layer.visibleRect.height / 2
         
         
         saveButton.backgroundColor = UIColor.yellowColor()
         saveButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         saveButton.layer.cornerRadius = saveButton.layer.visibleRect.height/2
+        
+        
+        bgRadCirc.backgroundColor = UIColor.grayColor()
+        bgRadCirc.layer.cornerRadius = bgRadCirc.layer.visibleRect.height / 2
+        
+        
+        topRadCirc.backgroundColor = UIColor.yellowColor()
+        topRadCirc.layer.cornerRadius = topRadCirc.layer.visibleRect.height / 2
+        
+        var radius = 100.0
+        
+        if (NSUserDefaults.standardUserDefaults().objectForKey("radiusSize") != nil) {
+            
+            radius = NSUserDefaults.standardUserDefaults().doubleForKey("radiusSize")
+            
+            radius = round(10 * radius) / 10
+            
+            print("loaded radius \(radius)")
+            
+            radiusSlider.value = Float(radius / 10)
+            
+        }
+        
+        resizeRadiusArea()
         
     }
 
@@ -81,6 +108,26 @@ class ResetViewController: UIViewController {
     }
     
     
+    @IBAction func changeSlider(sender: AnyObject) {
+        
+        
+        resizeRadiusArea()
+        
+    }
+    
+    func resizeRadiusArea()
+    {
+        radiusValue.text = String(round(10 * (radiusSlider.value * 100) / 10) / 10) + "m"
+        
+        let radiusPerc = CGFloat((radiusSlider.value - 10) / 90)
+        
+        let newRadius : CGFloat = CGFloat((70*radiusPerc) + 20.0)
+        
+        print("slider value: \(radiusSlider.value) new circ radius \(newRadius)")
+        
+        topRadCirc.transform = CGAffineTransformMakeScale(radiusPerc, radiusPerc)
+        
+    }
     
     @IBAction func buttonSave(sender: AnyObject) {
         
@@ -88,6 +135,12 @@ class ResetViewController: UIViewController {
         NSUserDefaults.standardUserDefaults().setObject(radiusSlider.value * 10, forKey: "radiusSize")
         NSUserDefaults.standardUserDefaults().synchronize()
         
+    }
+    
+    
+    func HSBColorColorPickerTouched(sender:HSBColorPicker, color:UIColor, point:CGPoint, state:UIGestureRecognizerState)
+    {
+        print("color touched \(color)")
     }
     
 
