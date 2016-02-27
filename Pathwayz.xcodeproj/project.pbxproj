@@ -18,7 +18,6 @@
 		AA3AD8241C54E04A00318BDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA3AD8231C54E04A00318BDE /* Assets.xcassets */; };
 		AA3AD8271C54E04A00318BDE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA3AD8251C54E04A00318BDE /* LaunchScreen.storyboard */; };
 		AA3AD82F1C5589ED00318BDE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3AD82E1C5589ED00318BDE /* CoreLocation.framework */; };
-		AA5370C71C73F05E002C4DF4 /* HSBColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5370C61C73F05E002C4DF4 /* HSBColorPicker.swift */; };
 		AA5B60551C635BE2008DEB71 /* SavedPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B60541C635BE2008DEB71 /* SavedPin.swift */; };
 		AA5B60571C635D3E008DEB71 /* AddSavedPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B60561C635D3E008DEB71 /* AddSavedPinViewController.swift */; };
 		AA5B605A1C640C37008DEB71 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5B60591C640C37008DEB71 /* CloudKit.framework */; };
@@ -47,7 +46,6 @@
 		AA3AD8261C54E04A00318BDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA3AD8281C54E04A00318BDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA3AD82E1C5589ED00318BDE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		AA5370C61C73F05E002C4DF4 /* HSBColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSBColorPicker.swift; sourceTree = "<group>"; };
 		AA5B60541C635BE2008DEB71 /* SavedPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedPin.swift; sourceTree = "<group>"; };
 		AA5B60561C635D3E008DEB71 /* AddSavedPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSavedPinViewController.swift; sourceTree = "<group>"; };
 		AA5B60581C640C10008DEB71 /* Pathwayz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Pathwayz.entitlements; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 				AA5B608A1C680A71008DEB71 /* ResetViewController.swift */,
 				AA293FE21C6893DC00A5C71C /* FileIO.swift */,
 				AA680A051C69F3E200CABB71 /* CustomTableViewCell.swift */,
-				AA5370C61C73F05E002C4DF4 /* HSBColorPicker.swift */,
 			);
 			path = Pathwayz;
 			sourceTree = "<group>";
@@ -229,7 +226,6 @@
 				AA5B608B1C680A71008DEB71 /* ResetViewController.swift in Sources */,
 				AA293FE31C6893DC00A5C71C /* FileIO.swift in Sources */,
 				AA293FE81C689BD000A5C71C /* LocationModel.xcdatamodeld in Sources */,
-				AA5370C71C73F05E002C4DF4 /* HSBColorPicker.swift in Sources */,
 				AA5B60571C635D3E008DEB71 /* AddSavedPinViewController.swift in Sources */,
 				AA680A061C69F3E200CABB71 /* CustomTableViewCell.swift in Sources */,
 			);

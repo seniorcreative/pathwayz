@@ -26,6 +26,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var myStoredLocations : [LocationModel] = []
     
+    
+    var lineColor: NSArray = [0,204,204]
     // Outlets
     
     @IBOutlet weak var mapView: MKMapView!
@@ -41,6 +43,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     @IBOutlet weak var addPinContainer: UIView!
     
     @IBOutlet weak var iconView1: UIView!
+    @IBOutlet weak var IconView1Circ: UIView!
     
     
     // Constants
@@ -125,6 +128,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         
     }
     
+    override func viewDidAppear(animated: Bool) {
+        
+        //
+        
+        if (NSUserDefaults.standardUserDefaults().arrayForKey("lineColor") != nil) {
+            
+            self.lineColor = NSUserDefaults.standardUserDefaults().arrayForKey("lineColor")! as NSArray
+            
+            let R = Float(self.lineColor[0] as! NSNumber)
+            let G = Float(self.lineColor[1] as! NSNumber)
+            let B = Float(self.lineColor[2] as! NSNumber)
+            
+            self.iconBackground1.backgroundColor = UIColor(colorLiteralRed: R/255, green: G/255, blue: B/255, alpha: 1.0)
+            
+        }
+        
+        loadLocations()
+        
+        plotLocations()
+            
+    }
+    
    
     
     /// Custom methods
@@ -141,32 +166,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        
-        print("updated to location \(newLocation) from \(oldLocation)")
-        
-    }
-    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-//        print("locations = \(locValue.latitude) \(locValue.longitude)")
 
         
         // check for reading of accuracy, and reachability and only use location based on satisfaction of rules.
-
         let locValue:CLLocationCoordinate2D = locations[0].coordinate
-
         
         if (locations[0].horizontalAccuracy <= 75.0)
         {
-
-//            myLocations.append(locValue)
-//            
-//            saveAllLocations()
             
             addLocation(locValue)
-     
+            
         }
+        
+        plotLocations()
+       
+        
+    }
+    
+    
+    func plotLocations()
+    {
+        
         
         if(self.mapView.overlays.count > 0)
         {
@@ -185,10 +206,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         let polyline = MKPolyline(coordinates: &myLocations, count: self.myLocations.count)
         self.mapView.addOverlay(polyline)
         
-        if(self.myLocations.count < 1)
-        {
-            centerMapOnLocation(manager.location!)
-        }
+//        if(self.myLocations.count < 1)
+//        {
+            centerMapOnLocation(locationManager.location!)
+//        }
         
     }
     
@@ -372,7 +393,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         
         if (overlay is MKPolyline) {
             let pr = MKPolylineRenderer(overlay: overlay)
-            pr.strokeColor = UIColor(colorLiteralRed: 0/255, green: 204/255, blue: 204/255, alpha: 0.7)
+            
+            
+            let R = Float(self.lineColor[0] as! NSNumber)
+            let G = Float(self.lineColor[1] as! NSNumber)
+            let B = Float(self.lineColor[2] as! NSNumber)
+            
+            
+            pr.strokeColor = UIColor(colorLiteralRed: R/255, green: G/255, blue: B/255, alpha: 0.7)
       
             
             pr.lineWidth = 7 // 20 * self.currentZoomScale!

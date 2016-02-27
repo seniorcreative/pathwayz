@@ -14,7 +14,7 @@ import CoreData
 //    func resetPaths()
 //}
 
-class ResetViewController: UIViewController, HSBColorPickerDelegate {
+class ResetViewController: UIViewController, UITextFieldDelegate {
     
     // Have this verbose line at the top for access to core data throughout app.
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -28,18 +28,52 @@ class ResetViewController: UIViewController, HSBColorPickerDelegate {
     @IBOutlet weak var radiusSlider: UISlider!
     @IBOutlet weak var resetButton: UIButton!
     
+    @IBOutlet weak var firstNameTextField: UITextField!
+    
+    @IBOutlet weak var lastNameTextField: UITextField!
+    
+    
 //    var delegate: ResetViewDelegate!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    
+    
+    @IBAction func btnBlue(sender: AnyObject) {
+        //
+        
+        setLineColor([0,204,204])
+    }
+    
+    @IBAction func btnYellow(sender: AnyObject) {
+        //
+        setLineColor([255,255,0])
+    }
+    
+    @IBAction func btnPurple(sender: AnyObject) {
+        //
+        setLineColor([102,0,153])
+    }
+    
+    func setLineColor(colorArray: NSArray)
+    {
+        
+        NSUserDefaults.standardUserDefaults().setObject(colorArray, forKey: "lineColor")
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
 
         // Do any additional setup after loading the view.
         
-//        resetButton.backgroundColor = UIColor.redColor()
-//        resetButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-//        resetButton.layer.cornerRadius = resetButton.layer.visibleRect.height / 2
+        resetButton.backgroundColor = UIColor.yellowColor()
+        resetButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        resetButton.layer.cornerRadius = resetButton.layer.visibleRect.height / 2
         
         
         saveButton.backgroundColor = UIColor.yellowColor()
@@ -62,13 +96,35 @@ class ResetViewController: UIViewController, HSBColorPickerDelegate {
             
             radius = round(10 * radius) / 10
             
-            print("loaded radius \(radius)")
+//            print("loaded radius \(radius)")
             
             radiusSlider.value = Float(radius / 10)
             
         }
         
         resizeRadiusArea()
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+    
+        let firstName = NSUserDefaults.standardUserDefaults().stringForKey("firstNameKey")
+        let lastName = NSUserDefaults.standardUserDefaults().stringForKey("lastNameKey")
+        
+        if (firstName != nil)
+        {
+            
+            firstNameTextField.text = firstName
+            
+        }
+        
+        if (lastName != nil)
+        {
+            
+            lastNameTextField.text = lastName
+            
+        }
+        
         
     }
 
@@ -123,7 +179,7 @@ class ResetViewController: UIViewController, HSBColorPickerDelegate {
         
         let newRadius : CGFloat = CGFloat((70*radiusPerc) + 20.0)
         
-        print("slider value: \(radiusSlider.value) new circ radius \(newRadius)")
+//        print("slider value: \(radiusSlider.value) new circ radius \(newRadius)")
         
         topRadCirc.transform = CGAffineTransformMakeScale(radiusPerc, radiusPerc)
         
@@ -137,12 +193,20 @@ class ResetViewController: UIViewController, HSBColorPickerDelegate {
         
     }
     
-    
-    func HSBColorColorPickerTouched(sender:HSBColorPicker, color:UIColor, point:CGPoint, state:UIGestureRecognizerState)
-    {
-        print("color touched \(color)")
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString text: String) -> Bool {
+        
+        if(text == "\n") {
+            
+            NSUserDefaults.standardUserDefaults().setObject(firstNameTextField.text, forKey: "firstNameKey")
+            NSUserDefaults.standardUserDefaults().setObject(lastNameTextField.text, forKey: "lastNameKey")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+            textField.resignFirstResponder()
+            return false
+        }
+        return true
+        
     }
-    
 
     /*
     // MARK: - Navigation
