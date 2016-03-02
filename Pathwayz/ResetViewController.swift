@@ -47,7 +47,7 @@ class ResetViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func btnYellow(sender: AnyObject) {
         //
-        setLineColor([255,255,0])
+        setLineColor([255,110,0])
     }
     
     @IBAction func btnPurple(sender: AnyObject) {
@@ -81,7 +81,7 @@ class ResetViewController: UIViewController, UITextFieldDelegate {
         saveButton.layer.cornerRadius = saveButton.layer.visibleRect.height/2
         
         
-        bgRadCirc.backgroundColor = UIColor.grayColor()
+        bgRadCirc.backgroundColor = UIColor(colorLiteralRed: 233/255, green: 233/255, blue: 233/255, alpha: 1.0)
         bgRadCirc.layer.cornerRadius = bgRadCirc.layer.visibleRect.height / 2
         
         

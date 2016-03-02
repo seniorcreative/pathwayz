@@ -26,6 +26,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var myStoredLocations : [LocationModel] = []
     
+    @IBOutlet weak var liveSwitch: UISwitch!
     
     var lineColor: NSArray = [0,204,204]
     // Outlets
@@ -157,7 +158,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     func centerMapOnLocation(location: CLLocation) {
         
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-            regionRadius * 2.0, regionRadius * 2.0)
+            regionRadius * 10.0, regionRadius * 10.0)
 
         self.mapView.setRegion(coordinateRegion, animated: true)
         
@@ -206,10 +207,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         let polyline = MKPolyline(coordinates: &myLocations, count: self.myLocations.count)
         self.mapView.addOverlay(polyline)
         
-//        if(self.myLocations.count < 1)
-//        {
+
+        if (liveSwitch!.on)
+        {
             centerMapOnLocation(locationManager.location!)
-//        }
+        }
+        
         
     }
     
@@ -310,7 +313,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         btnAddPin.enabled = false
        
         UIView.animateWithDuration(0.5, delay: 0.3, options: [.CurveEaseInOut], animations: {
-            self.addPinContainer.frame.origin.y = 80
+            self.addPinContainer.frame.origin.y = 130
             self.addPinContainer.alpha = 1.0
         }, completion: nil)
         
