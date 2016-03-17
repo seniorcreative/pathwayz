@@ -16,5 +16,7 @@ extension LocationModel {
 
     @NSManaged var lat: NSNumber?
     @NSManaged var long: NSNumber?
+    @NSManaged var time: NSDate?
+    @NSManaged var speed: NSNumber?
 
 }

@@ -1,4 +1,4 @@
-//
+ //
 //  ViewController.swift
 //  Pathwayz
 //
@@ -45,6 +45,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     
     @IBOutlet weak var iconView1: UIView!
     @IBOutlet weak var IconView1Circ: UIView!
+    @IBOutlet weak var iconNameLabel: UILabel!
+    @IBOutlet weak var btnSync: UIBarButtonItem!
     
     
     // Constants
@@ -57,6 +59,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     // Vars
     
     var myLocations: [CLLocationCoordinate2D] = []
+    var myLocationsFull: [CLLocation] = []
     var currentZoomScale : MKZoomScale? = 1
     var savedPins = [SavedPin]()
     
@@ -100,7 +103,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     
         loadAllPins()
 //        loadAllLocations() //  NSKeyed Method
-        loadLocations() // Core Data Method (persistent)
+//        loadLocations() // Core Data Method (persistent)
+        loadCloudKitLocations() // Cloud Kit Method (cloud)
         
         loadFriends()
         
@@ -144,10 +148,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
             self.iconBackground1.backgroundColor = UIColor(colorLiteralRed: R/255, green: G/255, blue: B/255, alpha: 1.0)
             
         }
+        else
+        {
+            // let's save that first line color.
+            let defaultColor = [0,204,204]
+            NSUserDefaults.standardUserDefaults().setObject(defaultColor, forKey: "lineColor")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
         
         loadLocations()
         
         plotLocations()
+        
+        
+        // Set name icon label
+        
+        setInitials()
             
     }
     
@@ -171,12 +187,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
 
         
         // check for reading of accuracy, and reachability and only use location based on satisfaction of rules.
-        let locValue:CLLocationCoordinate2D = locations[0].coordinate
+        let locValue:CLLocationCoordinate2D     = locations[0].coordinate
+        let locTimeStamp:NSDate                 = locations[0].timestamp
+        let locSpeed: CLLocationSpeed           = locations[0].speed
+//        
+//      print("got some location info \(locations[0])")
         
         if (locations[0].horizontalAccuracy <= 75.0)
         {
             
-            addLocation(locValue)
+//            addLocation(locValue, localocTimeStamp, locSpeed)
+            addLocation(locValue, atTime: locTimeStamp, andSpeed: locSpeed)
             
         }
         
@@ -189,6 +210,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     func plotLocations()
     {
         
+        
+        // Clear the line from the list of map overlays before drawing it again
         
         if(self.mapView.overlays.count > 0)
         {
@@ -204,9 +227,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
             
         }
         
+        // Now draw the line
+        
         let polyline = MKPolyline(coordinates: &myLocations, count: self.myLocations.count)
         self.mapView.addOverlay(polyline)
         
+        
+        // Center if we're in the tracking mode (use the switch value under the nav bar)
 
         if (liveSwitch!.on)
         {
@@ -217,18 +244,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     }
     
     // MARK : CORE DATA SAVING
+    // We will save locally, but allow this data to be synced to cloudkit when the sync button is pressed.
+    // I want to load this stuff back in when the app launches.
     
-    func addLocation(locValue: CLLocationCoordinate2D)
+    func addLocation(locValue: CLLocationCoordinate2D, atTime: NSDate, andSpeed:CLLocationSpeed)
     {
-        
         
         let insertedLocationItem = NSEntityDescription.insertNewObjectForEntityForName("LocationModel", inManagedObjectContext: self.managedObjectContext) as? LocationModel
         
         if (insertedLocationItem != nil)
         {
             
-            insertedLocationItem?.lat = locValue.latitude
-            insertedLocationItem?.long = locValue.longitude
+            insertedLocationItem?.lat       = locValue.latitude
+            insertedLocationItem?.long      = locValue.longitude
+            insertedLocationItem?.time      = atTime
+            insertedLocationItem?.speed     = andSpeed
             
             do
             {
@@ -249,6 +279,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     func loadLocations ()
     {
         
+        
+        // We will load in an array of Locations from the persistent core data store
+        
         let fetchRequest = NSFetchRequest(entityName: "LocationModel")
         
         do
@@ -259,15 +292,32 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
             {
                 
                 var locationCoords : [CLLocationCoordinate2D] = []
+                var tmpFullLocations : [CLLocation] = []
                 
                 for locationLoaded in myLocationsLoaded!
                 {
+                    
+                    let tmpLocation: CLLocation = CLLocation(
+                        coordinate: CLLocationCoordinate2D(latitude: Double(locationLoaded.lat!), longitude: Double(locationLoaded.long!)),
+                        altitude: 0.0,
+                        horizontalAccuracy: 0.0,
+                        verticalAccuracy: 0.0,
+                        course: 0.0,
+                        speed: Double(locationLoaded.speed!),
+                        timestamp: locationLoaded.time!)
+                    
+                    print("got loaded location time \(locationLoaded.time)")
+                    
+                    //latitude: Double(locationLoaded.lat!), longitude: Double(locationLoaded.long!))
+                    
+                    tmpFullLocations.append(tmpLocation)
                     
                     locationCoords.append(CLLocationCoordinate2D(latitude: Double(locationLoaded.lat!), longitude: Double(locationLoaded.long!)))
                     
                 }
                 
                 self.myLocations = locationCoords
+                self.myLocationsFull = tmpFullLocations
                 
             }
             
@@ -280,6 +330,58 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         }
         
         
+        
+    }
+    
+    //
+    
+    func loadCloudKitLocations()
+    {
+        
+        let defaultContainer = CKContainer.defaultContainer()
+        let privateDB = defaultContainer.privateCloudDatabase
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: "PathData", predicate: predicate)
+        
+        privateDB.performQuery(query, inZoneWithID: nil) { (results, error) -> Void in
+            
+            if (error != nil)
+            {
+                print(error)
+                
+            }
+            else
+            {
+                
+                // Success.
+                
+                
+                var locationCoords : [CLLocationCoordinate2D] = []
+                
+                
+//                for locationLoaded in results!
+//                {
+//                    print(locationLoaded.valueForKey("locationList")!)
+                    
+                    self.myLocationsFull = results![0].valueForKey("locationList")! as! [CLLocation]
+                    
+                    for myLocationFull in self.myLocationsFull
+                    {
+                        locationCoords.append(CLLocationCoordinate2D(latitude: Double(myLocationFull.coordinate.latitude), longitude: Double(myLocationFull.coordinate.longitude)))
+                        
+                    }
+                    
+//                }
+                
+
+                self.myLocations = locationCoords
+                
+                self.plotLocations()
+                
+            }
+            
+            
+        }
         
     }
     
@@ -496,43 +598,54 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     
+    
+    
         // LOCATIONS
     
+        // NS defaults method has been superseded by Core Data Model -- see loadLocations
     
-        func loadAllLocations() {
-            myLocations = []
-            
-            if let savedLocations = NSUserDefaults.standardUserDefaults().arrayForKey(kSavedLocationsKey) {
-                for savedLocation in savedLocations {
-                
-//                    print("Got a location that was saved \(savedLocation)")
-                    
-                    if let savedLocation = NSKeyedUnarchiver.unarchiveObjectWithData(savedLocation as! NSData) as? NSDictionary {
-                        
-                        let lat = savedLocation["lat"] as? Double
-                        let long = savedLocation["long"] as? Double
-                        
-                        if (lat != nil && long != nil)
-                        {
-                        
-                            let locationItem : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
-                            
-                            myLocations.append(locationItem)
-                            
-                        }
-                    }
-                }
-            }
-        }
-        
+//        func loadAllLocations() {
+//            myLocations = []
+//            
+//            if let savedLocations = NSUserDefaults.standardUserDefaults().arrayForKey(kSavedLocationsKey) {
+//                for savedLocation in savedLocations {
+//                
+////                    print("Got a location that was saved \(savedLocation)")
+//                    
+//                    if let savedLocation = NSKeyedUnarchiver.unarchiveObjectWithData(savedLocation as! NSData) as? NSDictionary {
+//                        
+//                        let lat         = savedLocation["lat"] as? Double
+//                        let long        = savedLocation["long"] as? Double
+//                        
+//                        if (lat != nil && long != nil)
+//                        {
+//                        
+//                            let locationItem : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+//                            
+//                            myLocations.append(locationItem)
+//                            
+//                        }
+//                    }
+//                }
+//            }
+//        }
+    
         func saveAllLocations() {
             let locations = NSMutableArray()
-            for locationItem in myLocations {
+            
+            for locationItem in self.myLocations {
                 
-                let locationItemAsObject : NSDictionary = ["lat" : locationItem.latitude, "long" : locationItem.longitude]
+                let locationItemAsObject : NSDictionary = [
+                    "lat" : locationItem.latitude,
+                    "long" : locationItem.longitude
+                ]
+                
                 let location = NSKeyedArchiver.archivedDataWithRootObject(locationItemAsObject)
+                
                 locations.addObject(location)
+                
             }
+            
             NSUserDefaults.standardUserDefaults().setObject(locations, forKey: kSavedLocationsKey)
             NSUserDefaults.standardUserDefaults().synchronize()
         }
@@ -615,7 +728,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     func loadFriends()
     {
         
-        let url = NSURL(string: "http://seniorcreative.com.au/data/friends.json")
+
+        // Add a randomizer cache buster
+        let url = NSURL(string: "http://seniorcreative.com.au/data/friends.json?rnd=" + NSUUID().UUIDString)
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) -> Void in
             
             if (error == nil)
@@ -625,12 +740,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
                 {
                     
                     let jsonString = NSString(data: data!, encoding: NSUTF8StringEncoding) as! String
-                    self.fileIO.write("json.txt", withData: jsonString)
+//                    print("writing json friends \(jsonString)")
+                    self.fileIO.write("jsonfriends.txt", withData: jsonString)
                     
                     
                 }
                 catch
                 {
+                    
+                    
+                    print("Error loading friends feed")
                     
                 }
                 
@@ -673,6 +792,95 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         }
         
         self.myLocations = []
+    }
+    
+    func setInitials()
+    {
+
+        
+        var firstName = NSUserDefaults.standardUserDefaults().stringForKey("firstNameKey")
+        var lastName = NSUserDefaults.standardUserDefaults().stringForKey("lastNameKey")
+        var initials = ""
+        if (firstName != nil && firstName?.characters.count >= 1)
+        {
+            let firstNameChar = firstName![firstName!.startIndex]
+            initials = initials + String(firstNameChar)
+            print("first name char not blank \(firstNameChar)")
+        }
+        else
+        {
+            firstName = "Enter"
+            initials += "?"
+        }
+        
+        if (lastName != nil && lastName?.characters.count >= 1)
+        {
+            let lastNameChar  = lastName![lastName!.startIndex]
+            initials = initials + String(lastNameChar)
+        }
+        else
+        {
+            lastName = "name"
+            initials += "?"
+        }
+    
+        iconNameLabel.text = initials
+    }
+    
+    
+    @IBAction func syncAction(sender: AnyObject) {
+        
+        
+        // 1. Create a UNIQUE record ID
+        let timestampAsString = String(format: "%f", NSDate.timeIntervalSinceReferenceDate())
+        let timestampParts = timestampAsString.componentsSeparatedByString(".")
+        let uniqueId = timestampParts[0]
+        
+        // let todoId = CKRecordID(recordName: timestampParts[0])
+        let locationSyncRecordID = CKRecordID(recordName: uniqueId)
+        
+        
+        // 2. Create a CKRecord
+        let locationSyncRecord = CKRecord(recordType: "PathData", recordID: locationSyncRecordID)
+        
+        
+        // 3. Set value field on our record.
+        //        let todoDesc = alertVC.textFields![0].text!
+        locationSyncRecord.setObject(self.myLocationsFull, forKey: "locationList")
+        locationSyncRecord.setObject("User1", forKey: "userID")
+        
+        var defaultContainer = CKContainer.defaultContainer()
+        
+        var privateDB = defaultContainer.privateCloudDatabase
+        
+        privateDB.saveRecord(locationSyncRecord, completionHandler: { (record, error) -> Void in
+            
+            // Cloud kit has returned here.
+            if (error != nil)
+            {
+                
+                print(error)
+                
+            }
+            else
+            {
+                
+                // Update UI?
+                print("Successfully saved list of full locations.")
+                
+//                // Get around issue of table not updating from the process thread
+//                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+//                    
+//                    self.todos.append(record!)
+//                    self.tableView.reloadData()
+//                    
+//                })
+                
+            }
+            
+        })
+        
+        
     }
     
 

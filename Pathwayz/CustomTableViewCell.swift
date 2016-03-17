@@ -50,6 +50,20 @@ class CustomTableViewCell: UITableViewCell {
         
     }
     
+    func setSwitchColor(colorArray: NSArray)
+    {
+        
+        let red = colorArray[0] as? Float
+        
+        let green = colorArray[1] as? Float
+        
+        let blue = colorArray[2] as? Float
+        
+        onSwitch.onTintColor = UIColor(colorLiteralRed: red!/255, green: green!/255, blue: blue!/255, alpha: 1.0)
+        
+        
+    }
+    
     func setVisible(visible: Int)
     {
         

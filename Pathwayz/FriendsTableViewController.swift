@@ -33,6 +33,9 @@ class FriendsTableViewController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         
+        getFriendsList()
+        
+        self.tableView.reloadData()
         
     }
     
@@ -65,10 +68,20 @@ class FriendsTableViewController: UITableViewController {
         // Configure the cell...
         
         cell.setNameIconColor(friendItem["color"] as! NSArray)
-        cell.setVisible(friendItem["visible"] as! Int)
+        cell.setSwitchColor(friendItem["color"] as! NSArray)
         
-        cell.title!.text        = friendItem["shortname"] as! String
-        cell.subtitle!.text     = friendItem["name"] as! String
+        let visibleValue = friendItem["visible"] as! Int
+        cell.setVisible(visibleValue)
+        
+        if (visibleValue == 1)
+        {
+            cell.backgroundColor = UIColor(colorLiteralRed: 200/255, green: 200/255, blue: 200/255, alpha: 1.0)
+            cell.title.textColor = UIColor.whiteColor()
+            cell.subtitle.textColor = UIColor.whiteColor()
+        }
+        
+        cell.title!.text        = friendItem["shortname"] as? String
+        cell.subtitle!.text     = friendItem["name"] as? String
         
 
         return cell
@@ -123,8 +136,71 @@ class FriendsTableViewController: UITableViewController {
     func getFriendsList()
     {
         
-        let jsonRead : String = fileIO.read("json.txt")
+        self.friends = []
+        
+        let jsonRead : String = fileIO.read("jsonfriends.txt")
 //        print("got your json \(jsonRead)")
+        
+        
+        // Add first person in (this is you)
+//        
+//        {
+//            "name" : "Sylvan Smoothe",
+//            "shortname" : "SS",
+//            "locationPathArray" : [],
+//            "color": [0, 204, 204],
+//            "visible": 1
+//        }
+      
+        var firstName = NSUserDefaults.standardUserDefaults().stringForKey("firstNameKey")
+        var lastName = NSUserDefaults.standardUserDefaults().stringForKey("lastNameKey")
+        
+        var initials = ""
+        
+        if (firstName != nil && firstName?.characters.count >= 1)
+        {
+            let firstNameChar = firstName![firstName!.startIndex]
+            initials = initials + String(firstNameChar)
+            print("first name char not blank \(firstNameChar)")
+        }
+        else
+        {
+            firstName = "Enter"
+            initials += "?"
+        }
+        
+        if (lastName != nil && lastName?.characters.count >= 1)
+        {
+            let lastNameChar  = lastName![lastName!.startIndex]
+            initials = initials + String(lastNameChar)
+        }
+        else
+        {
+            lastName = "name"
+            initials += "?"
+        }
+
+        
+//        if (NSUserDefaults.standardUserDefaults().arrayForKey("lineColor") != nil) {
+    
+        let lineColor = NSUserDefaults.standardUserDefaults().arrayForKey("lineColor")! as NSArray
+        
+        let R = Float(lineColor[0] as! NSNumber)
+        let G = Float(lineColor[1] as! NSNumber)
+        let B = Float(lineColor[2] as! NSNumber)
+     
+//        }
+        
+        let firstPerson = [
+            "name": firstName! + " " + lastName!,
+            "shortname": initials,
+            "locationPathArray": [],
+            "color": [R,G,B],
+            "visible": 1
+        ]
+        
+        friends.addObject(firstPerson)
+        
         
         do
         {

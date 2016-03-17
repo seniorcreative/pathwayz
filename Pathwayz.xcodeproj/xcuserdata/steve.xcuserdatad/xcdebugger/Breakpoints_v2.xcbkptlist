@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pathwayz/MapViewController.swift"
-            timestampString = "478562348.653775"
+            timestampString = "479803041.456876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "457"
-            endingLineNumber = "457"
-            landmarkName = "addSavedPinViewController(_:radius:identifier:note:eventType:)"
+            startingLineNumber = "506"
+            endingLineNumber = "506"
+            landmarkName = "mapView(_:rendererForOverlay:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pathwayz/MapViewController.swift"
-            timestampString = "478562348.653775"
+            timestampString = "479803041.456876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
-            landmarkName = "addSavedPinViewController(_:radius:identifier:note:eventType:)"
+            startingLineNumber = "491"
+            endingLineNumber = "491"
+            landmarkName = "mapView(_:annotationView:calloutAccessoryControlTapped:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pathwayz/MapViewController.swift"
-            timestampString = "478562348.653775"
+            timestampString = "479803041.456876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
-            landmarkName = "showAddPinVC(_:)"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
+            landmarkName = "loadCloudKitLocations()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pathwayz/MapViewController.swift"
-            timestampString = "478562348.653775"
+            timestampString = "479778049.336291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,7 +90,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pathwayz/MapViewController.swift"
-            timestampString = "478562348.653775"
+            timestampString = "479778049.336291"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pathwayz/MapViewController.swift"
+            timestampString = "479778049.336291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "101"
@@ -106,28 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pathwayz/MapViewController.swift"
-            timestampString = "478562348.653775"
+            timestampString = "479803041.456876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pathwayz/MapViewController.swift"
-            timestampString = "478562348.653775"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
-            landmarkName = "showAddPinVC(_:)"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
+            landmarkName = "loadCloudKitLocations()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -154,12 +154,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pathwayz/MapViewController.swift"
-            timestampString = "478562348.653775"
+            timestampString = "479789933.603786"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
-            landmarkName = "showAddPinVC(_:)"
+            startingLineNumber = "362"
+            endingLineNumber = "362"
+            landmarkName = "loadCloudKitLocations()"
             landmarkType = "5">
             <Locations>
                <Location
@@ -218,12 +218,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pathwayz/MapViewController.swift"
-            timestampString = "478562348.653775"
+            timestampString = "479803041.456876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "440"
-            endingLineNumber = "440"
-            landmarkName = "addSavedPinViewController(_:radius:identifier:note:eventType:)"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
+            landmarkName = "mapView(_:annotationView:calloutAccessoryControlTapped:)"
             landmarkType = "5">
             <Locations>
                <Location
@@ -266,12 +266,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pathwayz/MapViewController.swift"
-            timestampString = "478562348.653775"
+            timestampString = "479803041.456876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "451"
-            endingLineNumber = "451"
-            landmarkName = "addSavedPinViewController(_:radius:identifier:note:eventType:)"
+            startingLineNumber = "500"
+            endingLineNumber = "500"
+            landmarkName = "mapView(_:rendererForOverlay:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -282,12 +282,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pathwayz/MapViewController.swift"
-            timestampString = "478562348.653775"
+            timestampString = "479803041.456876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "455"
-            endingLineNumber = "455"
-            landmarkName = "addSavedPinViewController(_:radius:identifier:note:eventType:)"
+            startingLineNumber = "504"
+            endingLineNumber = "504"
+            landmarkName = "mapView(_:rendererForOverlay:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -298,12 +298,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pathwayz/MapViewController.swift"
-            timestampString = "478562348.653775"
+            timestampString = "479803041.456876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
-            landmarkName = "hideAddPinVC()"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
+            landmarkName = "loadCloudKitLocations()"
             landmarkType = "5">
             <Locations>
                <Location
@@ -374,16 +374,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pathwayz/MapViewController.swift"
-            timestampString = "478562424.697414"
+            timestampString = "479779810.749184"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
             landmarkName = "plotLocations()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pathwayz/MapViewController.swift"
+            timestampString = "479779810.749184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "addLocation(_:atTime:andSpeed:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
