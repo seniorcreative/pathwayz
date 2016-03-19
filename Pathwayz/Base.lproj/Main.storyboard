@@ -255,6 +255,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Upo-lP-Vmb">
+                                <rect key="frame" x="0.0" y="537" width="375" height="81"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9U-ph-yEJ">
+                                <rect key="frame" x="76" y="560" width="223" height="54"/>
+                                <fontDescription key="fontDescription" name="ShareTechMono-Regular" family="Share Tech Mono" pointSize="22"/>
+                                <state key="normal" title="Reset pathwayz">
+                                    <color key="titleColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetButtonAction:" destination="n3f-Mm-8hv" eventType="touchUpInside" id="Mm7-X3-vG2"/>
+                                </connections>
+                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EBy-Gg-9AZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="537"/>
                                 <subviews>
@@ -543,23 +557,10 @@
                                     <outlet property="delegate" destination="n3f-Mm-8hv" id="Ugj-nN-gsq"/>
                                 </connections>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9U-ph-yEJ">
-                                <rect key="frame" x="76" y="552" width="223" height="54"/>
-                                <fontDescription key="fontDescription" name="ShareTechMono-Regular" family="Share Tech Mono" pointSize="22"/>
-                                <state key="normal" title="Reset pathwayz">
-                                    <color key="titleColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="resetButtonAction:" destination="n3f-Mm-8hv" eventType="touchUpInside" id="Mm7-X3-vG2"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Upo-lP-Vmb">
-                                <rect key="frame" x="0.0" y="537" width="375" height="81"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="d9U-ph-yEJ" firstAttribute="top" secondItem="EBy-Gg-9AZ" secondAttribute="bottom" constant="15" id="2qH-rm-Qde"/>
                             <constraint firstAttribute="bottom" secondItem="EBy-Gg-9AZ" secondAttribute="bottom" constant="130" id="7QF-5E-bGO"/>
                             <constraint firstItem="EBy-Gg-9AZ" firstAttribute="centerX" secondItem="d9U-ph-yEJ" secondAttribute="centerX" id="CJR-Ky-Irb"/>
                             <constraint firstItem="EBy-Gg-9AZ" firstAttribute="trailing" secondItem="Upo-lP-Vmb" secondAttribute="trailing" id="S1S-0J-Yme"/>
@@ -570,9 +571,9 @@
                             <constraint firstItem="Upo-lP-Vmb" firstAttribute="top" secondItem="EBy-Gg-9AZ" secondAttribute="bottom" id="h8I-iM-NCK"/>
                             <constraint firstItem="Upo-lP-Vmb" firstAttribute="bottom" secondItem="GrB-oE-oKt" secondAttribute="top" id="jQB-VQ-51D"/>
                             <constraint firstItem="EBy-Gg-9AZ" firstAttribute="leading" secondItem="Upo-lP-Vmb" secondAttribute="leading" id="qvC-Kf-rrI"/>
+                            <constraint firstItem="GrB-oE-oKt" firstAttribute="top" secondItem="d9U-ph-yEJ" secondAttribute="bottom" constant="4" id="tU7-HA-bFP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="d9U-ph-yEJ" secondAttribute="trailing" constant="56" id="tn8-BW-nIM"/>
                             <constraint firstItem="d9U-ph-yEJ" firstAttribute="leading" secondItem="egJ-bc-EFc" secondAttribute="leadingMargin" constant="60" id="v5m-Uy-axz"/>
-                            <constraint firstItem="GrB-oE-oKt" firstAttribute="top" secondItem="d9U-ph-yEJ" secondAttribute="bottom" constant="12" id="ytu-jZ-fe2"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -655,10 +656,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="as3-F6-2g6">
-                                <rect key="frame" x="249" y="76" width="97" height="30"/>
+                                <rect key="frame" x="261" y="76" width="85" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="85" id="3lu-dO-h4a"/>
-                                    <constraint firstAttribute="width" constant="97" id="UaP-AI-cZB"/>
+                                    <constraint firstAttribute="width" constant="85" id="UaP-AI-cZB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ShareTechMono-Regular" family="Share Tech Mono" pointSize="15"/>
                                 <state key="normal" title="Save Pin"/>
@@ -699,7 +700,7 @@
                             <constraint firstItem="Ga6-r0-C3b" firstAttribute="leading" secondItem="rFq-OP-Xk2" secondAttribute="leadingMargin" constant="32" id="EAv-et-mTD"/>
                             <constraint firstItem="Ga6-r0-C3b" firstAttribute="leading" secondItem="xAr-SO-zxb" secondAttribute="leading" id="FMW-1U-DE2"/>
                             <constraint firstItem="jN3-w9-t80" firstAttribute="leading" secondItem="rFq-OP-Xk2" secondAttribute="leadingMargin" constant="10" id="MoL-qe-gmc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="as3-F6-2g6" secondAttribute="trailing" constant="9" id="Pjk-Pd-Pk1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="as3-F6-2g6" secondAttribute="trailing" constant="13" id="Pjk-Pd-Pk1"/>
                             <constraint firstItem="xAr-SO-zxb" firstAttribute="leading" secondItem="rFq-OP-Xk2" secondAttribute="leadingMargin" constant="32" id="ZkN-9S-Kc6"/>
                             <constraint firstItem="Ga6-r0-C3b" firstAttribute="baseline" secondItem="as3-F6-2g6" secondAttribute="baseline" id="qF1-Me-EMt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="as3-F6-2g6" secondAttribute="trailing" constant="32" id="t4N-Lg-pKl"/>
