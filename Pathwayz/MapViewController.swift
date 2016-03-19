@@ -67,7 +67,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
 
     
     override func viewDidLoad() {
+        
+        
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.barTintColor = UIColor.yellowColor()
+        navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "ShareTechMono-Regular", size: 18)!]
         
         
         if CLLocationManager.locationServicesEnabled() {
@@ -306,7 +311,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
                         speed: Double(locationLoaded.speed!),
                         timestamp: locationLoaded.time!)
                     
-                    print("got loaded location time \(locationLoaded.time)")
+//                    print("got loaded location time \(locationLoaded.time)")
                     
                     //latitude: Double(locationLoaded.lat!), longitude: Double(locationLoaded.long!))
                     

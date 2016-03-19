@@ -18,6 +18,7 @@
 		AA3AD8241C54E04A00318BDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA3AD8231C54E04A00318BDE /* Assets.xcassets */; };
 		AA3AD8271C54E04A00318BDE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA3AD8251C54E04A00318BDE /* LaunchScreen.storyboard */; };
 		AA3AD82F1C5589ED00318BDE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3AD82E1C5589ED00318BDE /* CoreLocation.framework */; };
+		AA55BFA81C9D0627009E03B2 /* ShareTechMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA55BFA71C9D05AD009E03B2 /* ShareTechMono-Regular.ttf */; };
 		AA5B60551C635BE2008DEB71 /* SavedPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B60541C635BE2008DEB71 /* SavedPin.swift */; };
 		AA5B60571C635D3E008DEB71 /* AddSavedPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B60561C635D3E008DEB71 /* AddSavedPinViewController.swift */; };
 		AA5B605A1C640C37008DEB71 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5B60591C640C37008DEB71 /* CloudKit.framework */; };
@@ -46,6 +47,7 @@
 		AA3AD8261C54E04A00318BDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA3AD8281C54E04A00318BDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA3AD82E1C5589ED00318BDE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		AA55BFA71C9D05AD009E03B2 /* ShareTechMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ShareTechMono-Regular.ttf"; sourceTree = "<group>"; };
 		AA5B60541C635BE2008DEB71 /* SavedPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedPin.swift; sourceTree = "<group>"; };
 		AA5B60561C635D3E008DEB71 /* AddSavedPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSavedPinViewController.swift; sourceTree = "<group>"; };
 		AA5B60581C640C10008DEB71 /* Pathwayz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Pathwayz.entitlements; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 		AA3AD81B1C54E04A00318BDE /* Pathwayz */ = {
 			isa = PBXGroup;
 			children = (
+				AA55BFA61C9D059F009E03B2 /* Fonts */,
 				AA5B60601C655412008DEB71 /* Images.xcassets */,
 				AA5B605F1C646B7F008DEB71 /* images */,
 				AA5B60581C640C10008DEB71 /* Pathwayz.entitlements */,
@@ -123,6 +126,14 @@
 				AA680A051C69F3E200CABB71 /* CustomTableViewCell.swift */,
 			);
 			path = Pathwayz;
+			sourceTree = "<group>";
+		};
+		AA55BFA61C9D059F009E03B2 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AA55BFA71C9D05AD009E03B2 /* ShareTechMono-Regular.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		AA5B605F1C646B7F008DEB71 /* images */ = {
@@ -200,6 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA55BFA81C9D0627009E03B2 /* ShareTechMono-Regular.ttf in Resources */,
 				AA3AD8271C54E04A00318BDE /* LaunchScreen.storyboard in Resources */,
 				AA5B60611C655412008DEB71 /* Images.xcassets in Resources */,
 				AA3AD8241C54E04A00318BDE /* Assets.xcassets in Resources */,

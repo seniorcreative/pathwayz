@@ -38,33 +38,80 @@ class ResetViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     
     
+    @IBOutlet weak var btnTeal: UIButton!
+    @IBOutlet weak var btnOrange: UIButton!
+    @IBOutlet weak var btnPurple: UIButton!
+    
+    @IBOutlet weak var blueCirc: UIView!
+    @IBOutlet weak var orangeCirc: UIView!
+    @IBOutlet weak var purpleCirc: UIView!
+    
+    @IBOutlet weak var blueTick: UIImageView!
+    @IBOutlet weak var orangeTick: UIImageView!
+    @IBOutlet weak var purpleTick: UIImageView!
     
     @IBAction func btnBlue(sender: AnyObject) {
         //
-        
         setLineColor([0,204,204])
+        blueTick.hidden = false
+        orangeTick.hidden = true
+        purpleTick.hidden = true
     }
     
     @IBAction func btnYellow(sender: AnyObject) {
         //
         setLineColor([255,110,0])
+        blueTick.hidden = true
+        orangeTick.hidden = false
+        purpleTick.hidden = true
     }
     
     @IBAction func btnPurple(sender: AnyObject) {
         //
         setLineColor([102,0,153])
+        blueTick.hidden = true
+        orangeTick.hidden = true
+        purpleTick.hidden = false
     }
     
     func setLineColor(colorArray: NSArray)
     {
-        
         NSUserDefaults.standardUserDefaults().setObject(colorArray, forKey: "lineColor")
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     
+    func getLineColor()
+    {
+        let lineColor = NSUserDefaults.standardUserDefaults().arrayForKey("lineColor")! as NSArray
+        
+        blueTick.hidden = true
+        orangeTick.hidden = true
+        purpleTick.hidden = true
+        
+        print("check line color \(lineColor[0])")
+        
+        if (Int(lineColor[0] as! NSNumber) == 0)
+        {
+            blueTick.hidden = false
+        }
+        if (Int(lineColor[0] as! NSNumber) == 255)
+        {
+            orangeTick.hidden = false
+        }
+        if (Int(lineColor[0] as! NSNumber) == 102)
+        {
+            purpleTick.hidden = false
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.getLineColor()
+        
+        navigationController?.navigationBar.barTintColor = UIColor.yellowColor()
+        navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "ShareTechMono-Regular", size: 18)!]
+
         
         firstNameTextField.delegate = self
         lastNameTextField.delegate = self
@@ -101,6 +148,26 @@ class ResetViewController: UIViewController, UITextFieldDelegate {
             radiusSlider.value = Float(radius / 10)
             
         }
+        
+        
+        btnTeal.backgroundColor = UIColor(colorLiteralRed: 0/255, green: 122/255, blue: 255/255, alpha: 1.0)
+        btnTeal.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        btnTeal.layer.cornerRadius = btnTeal.layer.visibleRect.height / 2
+        
+        btnOrange.backgroundColor = UIColor(colorLiteralRed: 0/255, green: 122/255, blue: 255/255, alpha: 1.0)
+        btnOrange.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        btnOrange.layer.cornerRadius = btnOrange.layer.visibleRect.height / 2
+        
+        btnPurple.backgroundColor = UIColor(colorLiteralRed: 0/255, green: 122/255, blue: 255/255, alpha: 1.0)
+        btnPurple.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        btnPurple.layer.cornerRadius = btnPurple.layer.visibleRect.height / 2
+        
+        
+        
+        blueCirc.layer.cornerRadius = blueCirc.layer.visibleRect.height / 2
+        orangeCirc.layer.cornerRadius = orangeCirc.layer.visibleRect.height / 2
+        purpleCirc.layer.cornerRadius = purpleCirc.layer.visibleRect.height / 2
+        
         
         resizeRadiusArea()
         
