@@ -101,7 +101,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="follow me" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kaf-M4-rKT">
                                 <rect key="frame" x="234" y="75" width="66" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7U-EQ-Qwi">
@@ -260,7 +260,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9U-ph-yEJ">
-                                <rect key="frame" x="76" y="560" width="223" height="54"/>
+                                <rect key="frame" x="76" y="554" width="223" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="7Ed-kx-FSb"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="ShareTechMono-Regular" family="Share Tech Mono" pointSize="22"/>
                                 <state key="normal" title="Reset pathwayz">
                                     <color key="titleColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -451,7 +454,7 @@
                                                     <constraint firstAttribute="width" constant="87" id="fPW-7p-QXO"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -549,8 +552,8 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="ll4-bu-KIN"/>
-                                        <exclude reference="KFH-Sh-WR4"/>
                                         <exclude reference="2Cr-ez-2ro"/>
+                                        <exclude reference="KFH-Sh-WR4"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -560,7 +563,6 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="d9U-ph-yEJ" firstAttribute="top" secondItem="EBy-Gg-9AZ" secondAttribute="bottom" constant="15" id="2qH-rm-Qde"/>
                             <constraint firstAttribute="bottom" secondItem="EBy-Gg-9AZ" secondAttribute="bottom" constant="130" id="7QF-5E-bGO"/>
                             <constraint firstItem="EBy-Gg-9AZ" firstAttribute="centerX" secondItem="d9U-ph-yEJ" secondAttribute="centerX" id="CJR-Ky-Irb"/>
                             <constraint firstItem="EBy-Gg-9AZ" firstAttribute="trailing" secondItem="Upo-lP-Vmb" secondAttribute="trailing" id="S1S-0J-Yme"/>
@@ -571,7 +573,7 @@
                             <constraint firstItem="Upo-lP-Vmb" firstAttribute="top" secondItem="EBy-Gg-9AZ" secondAttribute="bottom" id="h8I-iM-NCK"/>
                             <constraint firstItem="Upo-lP-Vmb" firstAttribute="bottom" secondItem="GrB-oE-oKt" secondAttribute="top" id="jQB-VQ-51D"/>
                             <constraint firstItem="EBy-Gg-9AZ" firstAttribute="leading" secondItem="Upo-lP-Vmb" secondAttribute="leading" id="qvC-Kf-rrI"/>
-                            <constraint firstItem="GrB-oE-oKt" firstAttribute="top" secondItem="d9U-ph-yEJ" secondAttribute="bottom" constant="4" id="tU7-HA-bFP"/>
+                            <constraint firstItem="GrB-oE-oKt" firstAttribute="top" secondItem="d9U-ph-yEJ" secondAttribute="bottom" constant="10" id="tU7-HA-bFP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="d9U-ph-yEJ" secondAttribute="trailing" constant="56" id="tn8-BW-nIM"/>
                             <constraint firstItem="d9U-ph-yEJ" firstAttribute="leading" secondItem="egJ-bc-EFc" secondAttribute="leadingMargin" constant="60" id="v5m-Uy-axz"/>
                         </constraints>

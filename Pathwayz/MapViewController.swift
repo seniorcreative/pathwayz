@@ -474,10 +474,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "mySavedPin"
+        
+        let R = Float(self.lineColor[0] as! NSNumber)
+        let G = Float(self.lineColor[1] as! NSNumber)
+        let B = Float(self.lineColor[2] as! NSNumber)
+        
+        
         if annotation is SavedPin {
             var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView
             if annotationView == nil {
                 annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView!.pinTintColor = UIColor(colorLiteralRed: R/255, green: G/255, blue: B/255, alpha: 1.0)
+                annotationView!.animatesDrop = true
                 annotationView?.canShowCallout = true
                 let removeButton = UIButton(type: .Custom)
                 removeButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
@@ -501,13 +509,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         
+        
+        
+        let R = Float(self.lineColor[0] as! NSNumber)
+        let G = Float(self.lineColor[1] as! NSNumber)
+        let B = Float(self.lineColor[2] as! NSNumber)
+        
         if (overlay is MKPolyline) {
             let pr = MKPolylineRenderer(overlay: overlay)
-            
-            
-            let R = Float(self.lineColor[0] as! NSNumber)
-            let G = Float(self.lineColor[1] as! NSNumber)
-            let B = Float(self.lineColor[2] as! NSNumber)
             
             
             pr.strokeColor = UIColor(colorLiteralRed: R/255, green: G/255, blue: B/255, alpha: 0.7)
@@ -519,8 +528,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         } else if (overlay is MKCircle) {
             let circleRenderer = MKCircleRenderer(overlay: overlay)
             circleRenderer.lineWidth = 1.0
-            circleRenderer.strokeColor = UIColor.yellowColor()
-            circleRenderer.fillColor = UIColor.yellowColor().colorWithAlphaComponent(0.4)
+            circleRenderer.strokeColor = UIColor(colorLiteralRed: R/255, green: G/255, blue: B/255, alpha: 0.7)
+            circleRenderer.fillColor = UIColor(colorLiteralRed: R/255, green: G/255, blue: B/255, alpha: 0.4) //UIColor.yellowColor().colorWithAlphaComponent(0.4)
             return circleRenderer
         }
         else
