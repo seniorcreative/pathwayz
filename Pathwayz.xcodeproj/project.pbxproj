@@ -31,6 +31,7 @@
 		AA5C86AA1C60BB49001CD0CB /* Pathwayz-Pin.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */; };
 		AA5CC7D01C6B29C400C48C38 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5CC7CF1C6B29C400C48C38 /* HockeySDK.framework */; };
 		AA680A061C69F3E200CABB71 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA680A051C69F3E200CABB71 /* CustomTableViewCell.swift */; };
+		AA80F5F31CA77CC4005F3917 /* Pathwayz-Pin-Centred.png in Resources */ = {isa = PBXBuildFile; fileRef = AA80F5F21CA77CC4005F3917 /* Pathwayz-Pin-Centred.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Pathwayz-Pin.png"; path = "../../Assets/Pathwayz/Pathwayz-Pin.png"; sourceTree = "<group>"; };
 		AA5CC7CF1C6B29C400C48C38 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
 		AA680A051C69F3E200CABB71 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		AA80F5F21CA77CC4005F3917 /* Pathwayz-Pin-Centred.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pathwayz-Pin-Centred.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 		AA5B605F1C646B7F008DEB71 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				AA80F5F21CA77CC4005F3917 /* Pathwayz-Pin-Centred.png */,
 				AA5C86A91C60BB49001CD0CB /* Pathwayz-Pin.png */,
 			);
 			name = images;
@@ -216,6 +219,7 @@
 				AA5B60611C655412008DEB71 /* Images.xcassets in Resources */,
 				AA3AD8241C54E04A00318BDE /* Assets.xcassets in Resources */,
 				AA3AD8221C54E04A00318BDE /* Main.storyboard in Resources */,
+				AA80F5F31CA77CC4005F3917 /* Pathwayz-Pin-Centred.png in Resources */,
 				AA5C86AA1C60BB49001CD0CB /* Pathwayz-Pin.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

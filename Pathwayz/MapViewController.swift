@@ -216,17 +216,45 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     {
         
         
+        let R = Float(self.lineColor[0] as! NSNumber)
+        let G = Float(self.lineColor[1] as! NSNumber)
+        let B = Float(self.lineColor[2] as! NSNumber)
+        
         // Clear the line from the list of map overlays before drawing it again
         
         if(self.mapView.overlays.count > 0)
         {
             for overlay in self.mapView.overlays
             {
-                let overlayType = overlay as? MKPolyline
+                let overlayLine = overlay as? MKPolyline
                 
-                if (overlayType != nil)
+                if (overlayLine != nil)
                 {
                     self.mapView.removeOverlay(overlay)
+                }
+            
+                let overlayCircle = overlay as? MKCircle
+                
+                if (overlayCircle != nil)
+                {
+                    
+//                    let circleRenderer = self.mapView.rendererForOverlay(overlayCircle!)
+                    
+//                    circleRenderer.
+                    
+//                  let circleRenderer = MKCircleRenderer(overlay: overlay)
+//                    print("we got a circle \(overlayCircle)")
+//                    overlayCircle.
+//                    circleRenderer.lineWidth = 1.0
+//                    overlayCircle.
+                    
+//                    circleRenderer
+                    
+//                    circleRenderer.strokeColor = UIColor(colorLiteralRed: R/255, green: G/255, blue: B/255, alpha: 0.7)
+//                    circleRenderer.fillColor = UIColor(colorLiteralRed: R/255, green: G/255, blue: B/255, alpha: 0.4) //
+//                    mapView(<#T##mapView: MKMapView##MKMapView#>, rendererForOverlay: <#T##MKOverlay#>)
+                    
+                    
                 }
             }
             
@@ -243,6 +271,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         if (liveSwitch!.on)
         {
             centerMapOnLocation(locationManager.location!)
+            self.locationManager.startUpdatingHeading()
+        }
+        else
+        {
+            
+            self.locationManager.stopUpdatingHeading()
+            
         }
         
         
@@ -475,17 +510,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "mySavedPin"
         
-        let R = Float(self.lineColor[0] as! NSNumber)
-        let G = Float(self.lineColor[1] as! NSNumber)
-        let B = Float(self.lineColor[2] as! NSNumber)
+//        let R = Float(self.lineColor[0] as! NSNumber)
+//        let G = Float(self.lineColor[1] as! NSNumber)
+//        let B = Float(self.lineColor[2] as! NSNumber)
         
         
         if annotation is SavedPin {
-            var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView
+            var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) // as? MKPinAnnotationView
             if annotationView == nil {
-                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                annotationView!.pinTintColor = UIColor(colorLiteralRed: R/255, green: G/255, blue: B/255, alpha: 1.0)
-                annotationView!.animatesDrop = true
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView!.image = UIImage(named: "AddPin")!
+                let fx = annotationView!.frame.origin.x
+                let fy = annotationView!.frame.origin.y
+                annotationView!.frame = CGRect(x: fx, y: fy, width: 54, height: 54)
+
+//                annotationView!.pinTintColor = UIColor(colorLiteralRed: R/255, green: G/255, blue: B/255, alpha: 1.0)
+//                annotationView!.animatesDrop = true
                 annotationView?.canShowCallout = true
                 let removeButton = UIButton(type: .Custom)
                 removeButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
@@ -507,9 +547,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         saveAllPins()
     }
     
+    
+    
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        
-        
         
         let R = Float(self.lineColor[0] as! NSNumber)
         let G = Float(self.lineColor[1] as! NSNumber)

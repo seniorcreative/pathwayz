@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "Pathwayz-Pin-Centred.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "AddPin@2x.png"
+      "filename" : "Pathwayz-Pin-Centred-1.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Pathwayz-Pin-Centred-2.png",
       "scale" : "3x"
     }
   ],

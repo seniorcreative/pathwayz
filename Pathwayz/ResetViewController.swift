@@ -109,6 +109,9 @@ class ResetViewController: UIViewController, UITextFieldDelegate {
         
         self.getLineColor()
         
+        
+
+        
         navigationController?.navigationBar.barTintColor = UIColor.yellowColor()
         navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "ShareTechMono-Regular", size: 18)!]
 
@@ -202,31 +205,67 @@ class ResetViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func resetButtonAction(sender: AnyObject) {
         
-        print ("reset button pressed")
+//        print ("reset button pressed")
         
-        // MARK : CORE DATA CLEARING
         
-        // Code credit https://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/#delete-multiple-entities
         
-//        let predicate = NSPredicate(format: "MyEntityAttribute == %@", "Matching Value")
-        let fetchRequest = NSFetchRequest(entityName: "LocationModel")
-//        fetchRequest.predicate = predicate
         
-        do {
-            let fetchedEntities = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [LocationModel]
+        let alertVC = UIAlertController(title: "Reset Pathwayz", message: nil, preferredStyle: .Alert)
+        
+        let resetAction = UIAlertAction(title: "Reset", style: .Default) { (UIAlertAction) -> Void in
             
-            for entity in fetchedEntities {
-                self.managedObjectContext.deleteObject(entity)
+            // Clear locally stored array of locations
+    
+            
+            // MARK : CORE DATA CLEARING
+            
+            // Code credit https://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/#delete-multiple-entities
+            
+            //        let predicate = NSPredicate(format: "MyEntityAttribute == %@", "Matching Value")
+            let fetchRequest = NSFetchRequest(entityName: "LocationModel")
+            //        fetchRequest.predicate = predicate
+            
+            do {
+                let fetchedEntities = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [LocationModel]
+                
+                for entity in fetchedEntities {
+                    self.managedObjectContext.deleteObject(entity)
+                }
+            } catch {
+                // Do something in response to error condition
             }
-        } catch {
-            // Do something in response to error condition
+            
+            do {
+                try self.managedObjectContext.save()
+            } catch {
+                // Do something in response to error condition
+            }
+            
+            
+            
         }
         
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            // Do something in response to error condition
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (UIAlertAction) -> Void in
+            
+            // Just Cancel
+            
         }
+        
+        
+        alertVC.addAction(resetAction)
+        alertVC.addAction(cancelAction)
+        
+        self.presentViewController(alertVC, animated: true, completion: nil)
+        
+        
+        
+       
+        
+        
+        
+        
+        
         
     }
     
