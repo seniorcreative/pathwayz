@@ -124,6 +124,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         self.iconView1.frame = iconView1Frame
         
         
+        
+        
+        prepopulateBridgeAlertPins()
+        
+        
+        
+        
+        
         // Animate the icon in.
         UIView.animateWithDuration(0.4, delay: 2.0, options: .CurveEaseOut, animations: {
             
@@ -548,7 +556,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
     }
     
     
-    
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         
         let R = Float(self.lineColor[0] as! NSNumber)
@@ -590,6 +597,84 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
 //        self.scaleField.text = String(currentZoomScale!)
     }
     
+    
+    func prepopulateBridgeAlertPins()
+    {
+        
+        let bridgeArray = [
+            [1,"South Melbourne,Albert Road",3.0,-37.842008,144.95957],
+            [2,"South Melbourne,York Street",3.0,-37.832099,144.954938],
+            [3,"South Melbourne,82 Montague",3.0,-37.829773,144.949226],
+            [4,"South Melbourne,444 City Road",3.0,-37.830711,144.95448],
+            [5,"Melbourne,33 Spencer Street",3.0,-37.821324,144.955207],
+            [6,"Melbourne,574 Flinders Street",3.0,-37.821185,144.954657],
+            [7,"Melbourne,Kings Way SEA LIFE",3.0,-37.820907,144.957817],
+            [8,"Melbourne,William Street",3.0,-37.819786,144.960162],
+            [9,"Melbourne,Queensbridge",3.0,-37.819626,144.961459],
+            [10,"East Melbourne,Batman Ave",3.0,-37.818402,144.975469],
+            [11,"East Melbourne,Jolimont Road",3.0,-37.816024,144.979063],
+            [12,"Cremorne,Cremorne Rail Bridge",3.0,-37.834018,144.993124],
+            [13,"Cremorne,Balmain St",3.0,-37.83018,144.993904],
+            [14,"Cremorne,Dunn Street",3.0,-37.82725,144.994009],
+            [15,"Richmond,Swan Street",3.0,-37.825029,144.992199],
+            [16,"Richmond,Punt Road South",3.0,-37.823483,144.989057],
+            [17,"Richmond,Punt Road North",3.0,-37.823986,144.988822],
+            [18,"Richmond,Egan Street",3.0,-37.813912,144.991893],
+            [19,"Richmond,York Street",3.0,-37.813029,144.992064],
+            [20,"Richmond,Garfield Street",3.0,-37.811749,144.992289],
+            [21,"Richmond,Elizabeth Street",3.0,-37.811067,144.992395],
+            [22,"Richmond,Victoria Street",3.0,-37.809727,144.992619],
+            [23,"Abbotsford,Greenwood Street",3.0,-37.808314,144.992994],
+            [24,"Abbotsford,Bloomburg Street",3.0,-37.807684,144.993213],
+            [25,"Abbotsford,Langridge Street",3.0,-37.807267,144.993302],
+            [26,"Abbotsford,Gipps Street",3.0,-37.80514,144.993632],
+            [27,"Abbotsford,Vere Street",3.0,-37.802706,144.994096],
+            [28,"Abbotsford,Yarra Street",3.0,-37.801977,144.994166],
+            [29,"Abbotsford,Studley Street",3.0,-37.801335,144.994188],
+            [30,"Abbotsford,Stafford Street",3.0,-37.800669,144.994205],
+            [31,"Abbotsford,Johnson Street",3.0,-37.799974,144.994289],
+            [32,"Clifton Hill,Noone Street",3.0,-37.793829,144.995309],
+            [33,"Clifton Hill,Roseneath Street",3.0,-37.792505,144.995235],
+            [34,"Clifton Hill,Queens Pde",3.0,-37.785124,144.995106],
+            [35,"Clifton Hill,Urguhart Street",3.0,-37.784395,144.997037],
+            [36,"Clifton Hill,Merri Pde",3.0,-37.779821,144.992193],
+            [37,"Were Street,Middle Brighton",3.3,-37.916254, 144.995173]
+        ]
+        
+        for bridgeItem in bridgeArray
+        {
+            
+//            let id      = bridgeItem[0] as? String
+            
+            let identifier = NSUUID().UUIDString
+            var note    = bridgeItem[1] as? String
+            note = note! + " Final Warning"
+            var note2   = note! + " First Warning"
+            let height  = bridgeItem[2] as? Double
+            let lat     = bridgeItem[3] as? Double
+            let long    = bridgeItem[4] as? Double
+            
+            print("Adding pin \(note!) \(height!)")
+            
+            let coordinate = CLLocationCoordinate2DMake(lat!, long!)
+            
+            let savedPin = SavedPin(coordinate: coordinate, radius: 100.0, identifier: identifier, note: note!, eventType: .OnEntry)
+            let savedPin2 = SavedPin(coordinate: coordinate, radius: 250.0, identifier: identifier, note: note2, eventType: .OnEntry)
+            
+            addSavedPin(savedPin)
+            addSavedPin(savedPin2)
+//
+            // 2
+            startMonitoringSavedPin(savedPin)
+            startMonitoringSavedPin(savedPin2)
+            
+        }
+        
+//        saveAllPins()
+        
+        
+        
+    }
     
     // MARK: AddSavedPinViewControllerDelegate
     
@@ -711,14 +796,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, AddSavedPi
         // 1
         let region = CLCircularRegion(center: savedPin.coordinate, radius: savedPin.radius, identifier: savedPin.identifier)
         // 2
-        region.notifyOnEntry = (savedPin.eventType == .OnEntry)
-        region.notifyOnExit = !region.notifyOnEntry
+        region.notifyOnEntry = true // (savedPin.eventType == .OnEntry)
+        region.notifyOnExit = false // !region.notifyOnEntry
         return region
     }
     
     func startMonitoringSavedPin(savedPin: SavedPin) {
         // 1
-        if !CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion) {
+        if !CLLocationManager .isMonitoringAvailableForClass(CLCircularRegion) {
             showSimpleAlertWithTitle("Error", message: "Geofencing is not supported on this device!", viewController: self)
             return
         }

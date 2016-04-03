@@ -10,12 +10,13 @@ import UIKit
 import CoreLocation
 import CoreData
 import HockeySDK
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
-
+    var audioPlayer: AVAudioPlayer!
     
     let locationManager = CLLocationManager() // Add this statement
 
@@ -62,19 +63,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func handleRegionEvent(region: CLRegion!) {
         // Show an alert if application is active
-        if UIApplication.sharedApplication().applicationState == .Active {
-            if let message = notefromRegionIdentifier(region.identifier) {
-                if let viewController = window?.rootViewController {
-                    showSimpleAlertWithTitle(nil, message: message, viewController: viewController)
-                }
-            }
-        } else {
-            // Otherwise present a local notification
-            var notification = UILocalNotification()
+//        if UIApplication.sharedApplication().applicationState == .Active {
+//            if let message = notefromRegionIdentifier(region.identifier) {
+//                if let viewController = window?.rootViewController {
+//                    showSimpleAlertWithTitle(nil, message: message, viewController: viewController)
+//                }
+//            }
+//        } else {
+//            // Otherwise present a local notification
+        
+            
+            let notification = UILocalNotification()
             notification.alertBody = notefromRegionIdentifier(region.identifier)
-            notification.soundName = "Default";
+            notification.soundName = "air-horn.wav";
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+//            
+//        }
+        
+        
+        
+        //            var audioPlayer = AVAudioPlayer()
+//        let alertSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("air-horn", ofType: "wav")!)
+//
+//      print("alert sound \(alertSound)")
+//
+        
+        
+        do {
+            
+            self.audioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("air-horn", ofType: "wav")!))
+            
+//            audioPlayer.prepareToPlay()
+            self.audioPlayer.play()
+            print("think i just played it?")
+        } catch {
+            print("Error getting the audio file")
         }
+    
+        
+        
+        
     }
     
     func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
